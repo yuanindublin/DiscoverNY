@@ -1,0 +1,30 @@
+name: busyenv
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - _libgcc_mutex
+  - asgiref 
+  - ca-certificates 
+  - certifi 
+  - django
+  - flit-core 
+  - krb5 
+  - libffi 
+  - libpq 
+  - nodejs 
+  - openssl
+  - pip 
+  - psycopg2 
+  - python
+  - pytz 
+  - setuptools 
+  - sqlite 
+  - sqlparse 
+  - tk 
+  - typing_extensions 
+  - wheel 
+  - xz 
+  - zlib
+  - djangorestframework==3.14.0
+prefix: /home/student/miniconda3/envs/busyenv
