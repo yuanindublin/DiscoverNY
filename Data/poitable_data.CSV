@@ -1,0 +1,178 @@
+id,name,description,latitude,longitude,opening_hours,category
+1,Fotografiska,poi in newyork,40.7392696,-73.986775,24,museum
+2,Museum of Chinese in America,poi in newyork,40.7194172,-73.9990481,24,museum
+3,Museum of Ice Cream,poi in newyork,40.7238654,-73.9979055,24,museum
+4,ICP International Center of Photography Museum,poi in newyork,40.7230882,-73.9933858,24,museum
+5,Museum of Reclaimed Urban Space,poi in newyork,40.7257313,-73.9778791,24,museum
+6,The Museum at FIT,poi in newyork,40.7466544,-73.9941473,24,museum
+7,Yeshiva University Museum,poi in newyork,40.737978,-73.9938312,24,museum
+8,National Museum of Mathematics,poi in newyork,40.7432428,-73.9873437,24,museum
+9,Museum of Sex,poi in newyork,40.7440374,-73.9873576,24,museum
+10,National Museum of the American Indian,poi in newyork,40.7040265,-74.0137472,24,museum
+11,Fraunces Tavern Museum,poi in newyork,40.7033867,-74.0113536,24,museum
+12,Viewpoint32,poi in newyork,40.703077,-74.0084183,24,viewpoint
+13,Viewpoint85,poi in newyork,40.703077,-74.0084183,24,viewpoint
+14,Grolier Club,poi in newyork,40.7640002,-73.9698587,24,museum
+15,Frick Madison,poi in newyork,40.7734755,-73.9639898,24,museum
+16,Society of Illustrators,poi in newyork,40.7648187,-73.966827,24,museum
+17,The Met Cloisters,poi in newyork,40.8648684,-73.9319228,24,museum
+18,Viewpoint10,poi in newyork,40.8662433,-73.9311863,24,viewpoint
+19,Viewpoint11,poi in newyork,40.8659637,-73.932132,24,viewpoint
+20,Viewpoint12,poi in newyork,40.8626092,-73.9332844,24,viewpoint
+21,Viewpoint13,poi in newyork,40.8615335,-73.9334253,24,viewpoint
+22,Viewpoint15,poi in newyork,40.865111,-73.9321426,24,viewpoint
+23,Viewpoint19,poi in newyork,40.8511613,-73.9452407,24,viewpoint
+24,Viewpoint24,poi in newyork,40.8618968,-73.9329314,24,viewpoint
+25,Viewpoint25,poi in newyork,40.8586025,-73.9373797,24,viewpoint
+26,Viewpoint41,poi in newyork,40.8631512,-73.9331465,24,viewpoint
+27,Viewpoint42,poi in newyork,40.8644911,-73.9327956,24,viewpoint
+28,Viewpoint43,poi in newyork,40.8607217,-73.9320779,24,viewpoint
+29,Viewpoint61,poi in newyork,40.8657494,-73.9320915,24,viewpoint
+30,Viewpoint62,poi in newyork,40.8662504,-73.9312198,24,viewpoint
+31,Viewpoint63,poi in newyork,40.8662433,-73.9311863,24,viewpoint
+32,Viewpoint64,poi in newyork,40.8659637,-73.932132,24,viewpoint
+33,Viewpoint65,poi in newyork,40.8626092,-73.9332844,24,viewpoint
+34,Viewpoint66,poi in newyork,40.8615335,-73.9334253,24,viewpoint
+35,Viewpoint68,poi in newyork,40.865111,-73.9321426,24,viewpoint
+36,Viewpoint72,poi in newyork,40.8511613,-73.9452407,24,viewpoint
+37,Viewpoint77,poi in newyork,40.8618968,-73.9329314,24,viewpoint
+38,Viewpoint78,poi in newyork,40.8586025,-73.9373797,24,viewpoint
+39,Viewpoint8,poi in newyork,40.8657494,-73.9320915,24,viewpoint
+40,Viewpoint9,poi in newyork,40.8662504,-73.9312198,24,viewpoint
+41,Viewpoint94,poi in newyork,40.8631512,-73.9331465,24,viewpoint
+42,Viewpoint95,poi in newyork,40.8644911,-73.9327956,24,viewpoint
+43,Viewpoint96,poi in newyork,40.8607217,-73.9320779,24,viewpoint
+44,Hayden Planetarium,poi in newyork,40.7813974,-73.9733215,24,museum
+45,"Richard Gilder Center for Science, Education, and Innovation",poi in newyork,40.7815797,-73.9746411,24,museum
+46,Rose Center for Earth and Space,poi in newyork,40.7816493,-73.9731563,24,museum
+47,Viewpoint33,poi in newyork,40.7859179,-73.9849146,24,viewpoint
+48,Viewpoint86,poi in newyork,40.7859179,-73.9849146,24,viewpoint
+49,Hall des Lumi¨¨res,poi in newyork,40.7137437,-74.005072,24,museum
+50,Staple Street Skybridge,poi in newyork,40.7183436,-74.0094133,24,viewpoint
+51,Mmuseumm,poi in newyork,40.7173656,-74.0028203,24,museum
+52,9/11 Tribute Museum,poi in newyork,40.7079432,-74.0137633,24,museum
+53,One World Observatory,poi in newyork,40.712949,-74.0130438,24,viewpoint
+54,Lower East Side Tenement Museum,poi in newyork,40.7187837,-73.9900266,24,museum
+55,International Center of Photography,poi in newyork,40.718097,-73.9886491,24,museum
+56,Museum of Illusions,poi in newyork,40.7396591,-74.0028554,24,museum
+57,Hemingway African Gallery,poi in newyork,40.725,-73.9977778,24,museum
+58,Leslie-Lohman Museum of Art,poi in newyork,40.7217683,-74.0030317,24,museum
+59,Rubin Museum of Art,poi in newyork,40.7400959,-73.9977377,24,museum
+60,International Center of Photography,poi in newyork,40.7557394,-73.9837251,24,museum
+61,Red Stairs,poi in newyork,40.7591943,-73.9849184,24,viewpoint
+62,Children's Museum of the Arts,poi in newyork,40.7275353,-74.0081354,24,museum
+63,Viewpoint16,poi in newyork,40.7260683,-74.0123763,24,viewpoint
+64,Viewpoint17,poi in newyork,40.7261681,-74.0133567,24,viewpoint
+65,Viewpoint69,poi in newyork,40.7260683,-74.0123763,24,viewpoint
+66,Viewpoint70,poi in newyork,40.7261681,-74.0133567,24,viewpoint
+67,Dahesh Museum of Art,poi in newyork,40.7250957,-74.0049076,24,museum
+68,Jackie Robinson Museum,poi in newyork,40.7231769,-74.0068809,24,museum
+69,The Trust for Governors Island,poi in newyork,40.6927237,-74.0159547,24,museum
+70,The Trust for Governors Island,poi in newyork,40.6927237,-74.0159547,24,museum
+71,The Trust for Governors Island,poi in newyork,40.6927237,-74.0159547,24,museum
+72,Viewpoint106,poi in newyork,40.693089,-74.018954,24,viewpoint
+73,Viewpoint106,poi in newyork,40.693089,-74.018954,24,viewpoint
+74,Viewpoint106,poi in newyork,40.693089,-74.018954,24,viewpoint
+75,Viewpoint30,poi in newyork,40.6867757,-74.0248374,24,viewpoint
+76,Viewpoint30,poi in newyork,40.6867757,-74.0248374,24,viewpoint
+77,Viewpoint30,poi in newyork,40.6867757,-74.0248374,24,viewpoint
+78,Viewpoint38,poi in newyork,40.6931365,-74.0196818,24,viewpoint
+79,Viewpoint38,poi in newyork,40.6931365,-74.0196818,24,viewpoint
+80,Viewpoint38,poi in newyork,40.6931365,-74.0196818,24,viewpoint
+81,Viewpoint39,poi in newyork,40.6888438,-74.0446421,24,viewpoint
+82,Viewpoint39,poi in newyork,40.6888438,-74.0446421,24,viewpoint
+83,Viewpoint39,poi in newyork,40.6888438,-74.0446421,24,viewpoint
+84,Viewpoint45,poi in newyork,40.6891489,-74.0440109,24,viewpoint
+85,Viewpoint45,poi in newyork,40.6891489,-74.0440109,24,viewpoint
+86,Viewpoint45,poi in newyork,40.6891489,-74.0440109,24,viewpoint
+87,Viewpoint46,poi in newyork,40.6888892,-74.0442292,24,viewpoint
+88,Viewpoint46,poi in newyork,40.6888892,-74.0442292,24,viewpoint
+89,Viewpoint46,poi in newyork,40.6888892,-74.0442292,24,viewpoint
+90,Viewpoint53,poi in newyork,40.693089,-74.018954,24,viewpoint
+91,Viewpoint53,poi in newyork,40.693089,-74.018954,24,viewpoint
+92,Viewpoint53,poi in newyork,40.693089,-74.018954,24,viewpoint
+93,Viewpoint83,poi in newyork,40.6867757,-74.0248374,24,viewpoint
+94,Viewpoint83,poi in newyork,40.6867757,-74.0248374,24,viewpoint
+95,Viewpoint83,poi in newyork,40.6867757,-74.0248374,24,viewpoint
+96,Viewpoint91,poi in newyork,40.6931365,-74.0196818,24,viewpoint
+97,Viewpoint91,poi in newyork,40.6931365,-74.0196818,24,viewpoint
+98,Viewpoint91,poi in newyork,40.6931365,-74.0196818,24,viewpoint
+99,Viewpoint92,poi in newyork,40.6888438,-74.0446421,24,viewpoint
+100,Viewpoint92,poi in newyork,40.6888438,-74.0446421,24,viewpoint
+101,Viewpoint92,poi in newyork,40.6888438,-74.0446421,24,viewpoint
+102,Viewpoint98,poi in newyork,40.6891489,-74.0440109,24,viewpoint
+103,Viewpoint98,poi in newyork,40.6891489,-74.0440109,24,viewpoint
+104,Viewpoint98,poi in newyork,40.6891489,-74.0440109,24,viewpoint
+105,Viewpoint99,poi in newyork,40.6888892,-74.0442292,24,viewpoint
+106,Viewpoint99,poi in newyork,40.6888892,-74.0442292,24,viewpoint
+107,Viewpoint99,poi in newyork,40.6888892,-74.0442292,24,viewpoint
+108,Malcolm X & Dr. Betty Shabazz Memorial and Educational Center,poi in newyork,40.8393577,-73.9406753,24,museum
+109,GWB View,poi in newyork,40.8498716,-73.9446423,24,viewpoint
+110,Sylvan Terrace,poi in newyork,40.8348393,-73.9397021,24,viewpoint
+111,Edge,poi in newyork,40.7539509,-74.0006727,24,viewpoint
+112,Hudson Yards Vista Point,poi in newyork,40.7556071,-74.0055179,24,viewpoint
+113,Gagosian,poi in newyork,40.7494423,-74.0059445,24,museum
+114,Summit One Vanderbilt,poi in newyork,40.7528374,-73.9785218,24,viewpoint
+115,Top of the Rock,poi in newyork,40.7590344,-73.9793952,24,viewpoint
+116,Viewpoint1,poi in newyork,40.7952752,-73.9521167,24,viewpoint
+117,Viewpoint100,poi in newyork,40.7790315,-73.9669537,24,viewpoint
+118,Viewpoint2,poi in newyork,40.7965284,-73.9528662,24,viewpoint
+119,Viewpoint22,poi in newyork,40.7795154,-73.9690591,24,viewpoint
+120,Viewpoint47,poi in newyork,40.7790315,-73.9669537,24,viewpoint
+121,Viewpoint54,poi in newyork,40.7952752,-73.9521167,24,viewpoint
+122,Viewpoint55,poi in newyork,40.7965284,-73.9528662,24,viewpoint
+123,Viewpoint75,poi in newyork,40.7795154,-73.9690591,24,viewpoint
+124,Viewpoint102,poi in newyork,40.8426272,-73.9325044,24,viewpoint
+125,Viewpoint3,poi in newyork,40.8494463,-73.9285932,24,viewpoint
+126,Viewpoint4,poi in newyork,40.8373579,-73.9354673,24,viewpoint
+127,Viewpoint49,poi in newyork,40.8426272,-73.9325044,24,viewpoint
+128,Viewpoint56,poi in newyork,40.8494463,-73.9285932,24,viewpoint
+129,Viewpoint57,poi in newyork,40.8373579,-73.9354673,24,viewpoint
+130,Viewpoint59,poi in newyork,40.8463207,-73.9296031,24,viewpoint
+131,Viewpoint6,poi in newyork,40.8463207,-73.9296031,24,viewpoint
+132,Viewpoint60,poi in newyork,40.8462228,-73.9295373,24,viewpoint
+133,Viewpoint7,poi in newyork,40.8462228,-73.9295373,24,viewpoint
+134,Viewpoint103,poi in newyork,40.7040113,-74.0176225,24,viewpoint
+135,Viewpoint50,poi in newyork,40.7040113,-74.0176225,24,viewpoint
+136,Viewpoint18,poi in newyork,40.7019951,-73.997407,24,viewpoint
+137,Viewpoint35,poi in newyork,40.700273,-73.9994769,24,viewpoint
+138,Viewpoint36,poi in newyork,40.6994832,-73.9999673,24,viewpoint
+139,Viewpoint71,poi in newyork,40.7019951,-73.997407,24,viewpoint
+140,Viewpoint88,poi in newyork,40.700273,-73.9994769,24,viewpoint
+141,Viewpoint89,poi in newyork,40.6994832,-73.9999673,24,viewpoint
+142,Viewpoint20,poi in newyork,40.715191,-74.0167787,24,viewpoint
+143,Viewpoint21,poi in newyork,40.7168038,-74.0154401,24,viewpoint
+144,Viewpoint23,poi in newyork,40.7044128,-74.0185873,24,viewpoint
+145,Viewpoint44,poi in newyork,40.7068884,-74.0185311,24,viewpoint
+146,Viewpoint73,poi in newyork,40.715191,-74.0167787,24,viewpoint
+147,Viewpoint74,poi in newyork,40.7168038,-74.0154401,24,viewpoint
+148,Viewpoint76,poi in newyork,40.7044128,-74.0185873,24,viewpoint
+149,Viewpoint97,poi in newyork,40.7068884,-74.0185311,24,viewpoint
+150,Skyscraper Museum,poi in newyork,40.7057229,-74.0177051,24,museum
+151,Viewpoint26,poi in newyork,40.8607367,-73.9179973,24,viewpoint
+152,Viewpoint27,poi in newyork,40.8601007,-73.9184413,24,viewpoint
+153,Viewpoint79,poi in newyork,40.8607367,-73.9179973,24,viewpoint
+154,Viewpoint80,poi in newyork,40.8601007,-73.9184413,24,viewpoint
+155,Dyckman Farmhouse Museum,poi in newyork,40.8673822,-73.9228859,24,museum
+156,Viewpoint28,poi in newyork,40.7077295,-73.9995351,24,viewpoint
+157,Viewpoint40,poi in newyork,40.70586,-74.0011642,24,viewpoint
+158,Viewpoint81,poi in newyork,40.7077295,-73.9995351,24,viewpoint
+159,Viewpoint93,poi in newyork,40.70586,-74.0011642,24,viewpoint
+160,Viewpoint29,poi in newyork,40.8155501,-73.9619788,24,viewpoint
+161,Viewpoint82,poi in newyork,40.8155501,-73.9619788,24,viewpoint
+162,Viewpoint34,poi in newyork,40.7497246,-73.961392,24,viewpoint
+163,Viewpoint87,poi in newyork,40.7497246,-73.961392,24,viewpoint
+164,Viewpoint37,poi in newyork,40.7035295,-73.9952975,24,viewpoint
+165,Viewpoint90,poi in newyork,40.7035295,-73.9952975,24,viewpoint
+166,West side highway access,poi in newyork,40.7991902,-73.9753221,24,viewpoint
+167,Free Public Stargazing,poi in newyork,40.740586,-74.0081171,24,viewpoint
+168,Ground Zero Museum Workshop,poi in newyork,40.74121,-74.0067195,24,museum
+169,American Folk Art Museum,poi in newyork,40.7732296,-73.9815958,24,museum
+170,Center for Architecture,poi in newyork,40.72873,-73.9985805,24,museum
+171,The Renee and Chaim Gross Foundation,poi in newyork,40.7284684,-73.99882,24,museum
+172,Natonial Jazz Museum in Harlem,poi in newyork,40.8099499,-73.9430899,24,museum
+173,Sugar Hill Children's Museum of Art and Story Telling,poi in newyork,40.8304543,-73.941171,24,museum
+174,The AKC Museum of the Dog,poi in newyork,40.7506893,-73.9776714,24,museum
+175,The Morgan Library & Museum,poi in newyork,40.7491907,-73.9814793,24,museum
+176,The Africa Center,poi in newyork,40.7963422,-73.9493338,24,museum
+177,South Street Seaport Museum,poi in newyork,40.706628,-74.0036758,24,museum

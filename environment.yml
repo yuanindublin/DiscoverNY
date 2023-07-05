@@ -4,27 +4,28 @@ channels:
   - defaults
 dependencies:
   - _libgcc_mutex
-  - asgiref 
-  - ca-certificates 
-  - certifi 
+  - asgiref
+  - ca-certificates
+  - certifi
   - django
-  - flit-core 
-  - krb5 
-  - libffi 
-  - libpq 
-  - nodejs 
+  - flit-core
+  - krb5
+  - libffi
+  - libpq
+  - nodejs
   - openssl
-  - pip 
-  - psycopg2 
+  - pip
+  - psycopg2
   - python
-  - pytz 
-  - setuptools 
-  - sqlite 
-  - sqlparse 
-  - tk 
-  - typing_extensions 
-  - wheel 
-  - xz 
+  - pytz
+  - setuptools
+  - sqlite
+  - sqlparse
+  - tk
+  - typing_extensions
+  - wheel
+  - xz
   - zlib
   - djangorestframework==3.14.0
+  - drf-spectacular>=0.15.1
 prefix: /home/student/miniconda3/envs/busyenv
