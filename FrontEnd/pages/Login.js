@@ -84,6 +84,14 @@ function Login({ navigation, route, props }) {
         <TouchableOpacity onPress={() => navigation.navigate("Register")}>
           <Text style={[fonts().link]}>Register</Text>
         </TouchableOpacity>
+
+
+        <Text style={[fonts().inputLabel, margins.topTenPercent]}>
+          Don't wanna login hahahahahahaha{" "}
+        </Text>
+        <TouchableOpacity onPress={() => navigation.navigate("Discover")}>
+          <Text style={[fonts().link]}>Skip</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
