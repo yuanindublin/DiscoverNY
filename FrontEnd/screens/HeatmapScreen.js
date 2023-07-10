@@ -74,21 +74,21 @@ const MapScreen = () => {
           className="w-full h-full object-cover rounded-2xl"
           region={mapRegion}
         >
-          <TouchableOpacity
-            className="items-right justify-rightspace-y-2"
-            onPress={() => navigation.navigate("HeatmapScreen")}
-          >
-            <View className="w-12 h-12 bg-[rgb(0,0,0)]  rounded-md items-center justify-center shadow-lg">
-              <Image
-                source={require("../assets/mapicon.png")}
-                className="w-full h-full rounded-md object-cover"
-              />
-            </View>
-            <Text className="text-[rgb(23,44,46)] text-l font-semibold">
-              HeatMap
-            </Text>
-          </TouchableOpacity>
-          {renderMarkers()}
+          {/* {renderMarkers()} */}
+          <Heatmap
+            region={mapRegion}
+            points={pois.map((poi) => ({
+              latitude: poi.latitude,
+              longitude: poi.longitude,
+              weight: poi.id,
+            }))}
+            radius={50}
+            gradient={{
+              colors: ["green", "orange", "yellow", "red", "white"],
+              startPoints: [0.01, 0.04, 0.1, 0.45, 0.5],
+              colorMapSize: 100,
+            }}
+          ></Heatmap>
         </MapView>
       ) : (
         <LoadScript googleMapsApiKey="AIzaSyBCc1BjkGUYR-w4mQOxXfPHorN9zwWXlvI">

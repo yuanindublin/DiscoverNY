@@ -5,11 +5,18 @@ import {
   ScrollView,
   Image,
   TouchableOpacity,
+  Platform,
 } from "react-native";
 import React, { useLayoutEffect, useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { FontAwesome, FontAwesome5, MaterialIcons } from "@expo/vector-icons";
 import MapView, { Marker } from "react-native-maps";
+// import {
+//   GoogleMap,
+//   useLoadScript,
+//   LoadScript,
+//   Marker,
+// } from "@react-google-maps/api";
 
 const ItemScreen = ({ route }) => {
   const navigation = useNavigation();

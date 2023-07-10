@@ -10,7 +10,14 @@ import {
 import React, { useEffect, useLayoutEffect, useState } from "react";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import { useNavigation } from "@react-navigation/native";
-import { Attractions, Avatar, Hotels, NotFound, Restaurants } from "../assets";
+import {
+  Attractions,
+  Avatar,
+  Hotels,
+  NotFound,
+  Restaurants,
+  Mapicon,
+} from "../assets";
 import MenuContainer from "../components/MenuContainer";
 
 import { FontAwesome } from "@expo/vector-icons";
@@ -55,9 +62,9 @@ const Discover = () => {
           className="items-center justify-center space-y-2"
           onPress={() => navigation.navigate("MapScreen")}
         >
-          <View className="w-12 h-12 bg-gray-400 rounded-md items-center justify-center shadow-lg">
+          <View className="w-12 h-12 bg-[rgb(0,0,0)]  rounded-md items-center justify-center shadow-lg">
             <Image
-              source={Avatar}
+              source={require("../assets/mapicon.png")}
               className="w-full h-full rounded-md object-cover"
             />
           </View>

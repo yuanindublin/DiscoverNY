@@ -7,6 +7,9 @@ import HomeScreen from "./screens/HomeScreen";
 import Discover from "./screens/Discover";
 import ItemScreen from "./screens/ItemScreen";
 import MapScreen from "./screens/MapScreen";
+import HeatmapScreen from "./screens/HeatmapScreen";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 const Stack = createNativeStackNavigator();
 
@@ -20,6 +23,9 @@ export default function App() {
         <Stack.Screen name="Discover" component={Discover} />
         <Stack.Screen name="ItemScreen" component={ItemScreen} />
         <Stack.Screen name="MapScreen" component={MapScreen} />
+        <Stack.Screen name="HeatmapScreen" component={HeatmapScreen} />
+        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="Register" component={Register} />
       </Stack.Navigator>
     </NavigationContainer>
   );
