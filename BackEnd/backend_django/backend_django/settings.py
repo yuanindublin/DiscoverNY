@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     "drf_spectacular",
     "nybusy",
     "user",
+    "bucketlist",
+    "POIs",
 
 ]
 
