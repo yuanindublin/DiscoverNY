@@ -8,3 +8,4 @@ router.register('', POIViewSet)
 urlpatterns = [
     path('', include(router.urls)),
 ]
+''''''
