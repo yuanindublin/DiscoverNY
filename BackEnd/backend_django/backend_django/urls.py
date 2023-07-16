@@ -29,6 +29,7 @@ urlpatterns = [
         SpectacularSwaggerView.as_view(url_name='api-schema'),
         name='api-docs'
     ),
-    path('', include('nybusy.urls')),
+    path('api/POIs/', include('POIs.urls')),  # Assuming your POI app is named 'pois'
+    path('api/bucketlist/', include('bucketlist.urls')),
     path('api/user/', include('user.urls')),
 ]
