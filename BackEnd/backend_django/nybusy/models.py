@@ -62,4 +62,5 @@ class POI(models.Model):
 class UserBucketlist(models.Model):
     user = models.OneToOneField(get_user_model(), on_delete=models.CASCADE)
     pois = models.ManyToManyField(POI)
+    planned_visit_datetime = models.DateTimeField(null=True, blank=True)
 
