@@ -34,19 +34,21 @@ class UserManager(BaseUserManager):
 
         return user
 
+class Tag(models.Model):
+    name = models.CharField(max_length=200)
 
-# Create your models here.
+
 class User(AbstractBaseUser, PermissionsMixin,):
     """User in the system"""
     email = models.EmailField(max_length=255, unique=True)
     name = models.CharField(max_length=255)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=True)
+    interests = models.ManyToManyField(Tag, related_name='interested_users')
 
     objects = UserManager()
 
     USERNAME_FIELD = 'email'
-
 
 class POI(models.Model):
     name = models.CharField(max_length=255)
@@ -57,10 +59,15 @@ class POI(models.Model):
     opening_hours = models.FloatField()
     category = models.CharField(max_length=255)
     liked_by = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='liked_pois')
-
+    tags = models.ManyToManyField(Tag, related_name='pois')
 
 class UserBucketlist(models.Model):
     user = models.OneToOneField(get_user_model(), on_delete=models.CASCADE)
-    pois = models.ManyToManyField(POI)
+    pois = models.ManyToManyField(POI, through='BucketlistPOI')
+
+class BucketlistPOI(models.Model):
+    poi = models.ForeignKey(POI, on_delete=models.CASCADE)
+    bucketlist = models.ForeignKey(UserBucketlist, on_delete=models.CASCADE)
     planned_visit_datetime = models.DateTimeField(null=True, blank=True)
+
 
