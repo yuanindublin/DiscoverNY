@@ -52,39 +52,93 @@ const Discover = () => {
   }, [bl_lat, bl_lng, tr_lat, tr_lng, type]);
 
   return (
-    <SafeAreaView className="flex-1 bg-white relative">
-      <View className="flex-row items-center justify-between px-8">
-        <View>
-          <Text className="text-[40px] text-[#0B646B] font-bold">Discover</Text>
-          <Text className="text-[#527283] text-[36px]">Manhattan</Text>
-        </View>
-        <TouchableOpacity
-          className="items-center justify-center space-y-2"
-          onPress={() => navigation.navigate("MapScreen")}
-        >
-          <View className="w-12 h-12 bg-[rgb(0,0,0)]  rounded-md items-center justify-center shadow-lg">
+    <SafeAreaView style={{ flex: 1, backgroundColor: "white", relative: true }}>
+      <View
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "space-between",
+          padding: 8,
+        }}
+      >
+        {/* <TouchableOpacity onPress={() => navigation.openDrawer()}> */}
+        <TouchableOpacity onPress={() => navigation.navigate("POIScreen")}>
+        {/* <TouchableOpacity> */}
+          <View
+            style={{
+              width: 40,
+              height: 40,
+              backgroundColor: "white",
+              // borderRadius: 20,
+              alignItems: "center",
+              justifyContent: "center",
+              // shadowColor: "#000",
+              // shadowOffset: { width: 0, height: 2 },
+              // shadowOpacity: 0.8,
+              // shadowRadius: 2,
+              // elevation: 5,
+            }}
+          >
             <Image
-              source={require("../assets/mapicon.png")}
-              className="w-full h-full rounded-md object-cover"
+              source={require("../assets/icons/menu.png")}
+              style={{ width: "100%", height: "100%" }}
             />
           </View>
-          <Text className="text-[#0B646B] text-xl font-semibold">Map</Text>
         </TouchableOpacity>
-        {/* <View className="w-12 h-12 bg-gray-400 rounded-md items-center justify-center shadow-lg">
-          <Image
-            source={Avatar}
-            className="w-full h-full rounded-md object-cover"
-          />
-        </View> */}
+        <View>
+          <Text style={{ fontSize: 40, color: "#0B646B", fontWeight: "bold" }}>
+            Discover
+          </Text>
+          <Text style={{ color: "#527283", fontSize: 36 }}>Manhattan</Text>
+        </View>
+        <TouchableOpacity onPress={() => navigation.navigate("MapScreen")}>
+          <View
+            style={{
+              width: 60,
+              height: 60,
+              backgroundColor: "rgba(0, 0, 0, 0)",
+              borderRadius: 30,
+              alignItems: "center",
+              justifyContent: "center",
+              // shadowColor: "#000",
+              // shadowOffset: { width: 0, height: 2 },
+              // shadowOpacity: 0.8,
+              // shadowRadius: 2,
+              // elevation: 5,
+            }}
+          >
+            <Image
+              source={require("../assets/mapicon.png")}
+              style={{ width: "100%", height: "100%" }}
+            />
+          </View>
+          <Text style={{ color: "#0B646B", fontSize: 20, fontWeight: "bold" }}>
+            Map
+          </Text>
+        </TouchableOpacity>
       </View>
 
-      <View className="flex-row items-center bg-white mx-4 rounded-xl py-1 px-4 shadow-lg mt-4">
+      <View
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+          backgroundColor: "white",
+          margin: 4,
+          borderRadius: 20,
+          paddingVertical: 1,
+          paddingHorizontal: 4,
+          // shadowColor: "#000",
+          // shadowOffset: { width: 0, height: 2 },
+          // shadowOpacity: 0.2,
+          // shadowRadius: 2,
+          // elevation: 5,
+        }}
+      >
         <GooglePlacesAutocomplete
           GooglePlacesDetailsQuery={{ fields: "geometry" }}
-          placeholder="Search"
+          placeholder="Search a place"
           fetchDetails={true}
           onPress={(data, details = null) => {
-            // 'details' is provided when fetchDetails = true
             console.log(details?.geometry?.viewport);
             setBl_lat(details?.geometry?.viewport?.southwest?.lat);
             setBl_lng(details?.geometry?.viewport?.southwest?.lng);
@@ -98,14 +152,23 @@ const Discover = () => {
         />
       </View>
 
-      {/* Menu Container */}
       {isLoading ? (
-        <View className=" flex-1 items-center justify-center">
+        <View
+          style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
+        >
           <ActivityIndicator size="large" color="#0B646B" />
         </View>
       ) : (
         <ScrollView>
-          <View className=" flex-row items-center justify-between px-8 mt-8">
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "space-between",
+              padding: 8,
+              marginTop: 8,
+            }}
+          >
             <MenuContainer
               key={"hotels"}
               title="Hotels"
@@ -132,12 +195,31 @@ const Discover = () => {
           </View>
 
           <View>
-            <View className="flex-row items-center justify-between px-4 mt-8">
-              <Text className="text-[#2C7379] text-[28px] font-bold">
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "space-between",
+                padding: 4,
+                marginTop: 8,
+              }}
+            >
+              <Text
+                style={{ color: "#2C7379", fontSize: 28, fontWeight: "bold" }}
+              >
                 Top Tips
               </Text>
-              <TouchableOpacity className="flex-row items-center justify-center space-x-2">
-                <Text className="text-[#A0C4C7] text-[20px] font-bold">
+              <TouchableOpacity
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  marginLeft: 4,
+                }}
+              >
+                <Text
+                  style={{ color: "#A0C4C7", fontSize: 20, fontWeight: "bold" }}
+                >
                   Explore
                 </Text>
                 <FontAwesome
@@ -148,7 +230,16 @@ const Discover = () => {
               </TouchableOpacity>
             </View>
 
-            <View className="px-4 mt-8 flex-row items-center justify-evenly flex-wrap">
+            <View
+              style={{
+                paddingHorizontal: 4,
+                marginTop: 8,
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "space-evenly",
+                flexWrap: "wrap",
+              }}
+            >
               {mainData?.length > 0 ? (
                 <>
                   {mainData?.map((data, i) => (
@@ -167,12 +258,25 @@ const Discover = () => {
                 </>
               ) : (
                 <>
-                  <View className="w-full h-[400px] items-center space-y-8 justify-center">
+                  <View
+                    style={{
+                      width: "100%",
+                      height: 400,
+                      alignItems: "center",
+                      justifyContent: "space-y-8",
+                    }}
+                  >
                     <Image
                       source={NotFound}
-                      className=" w-32 h-32 object-cover"
+                      style={{ width: 128, height: 128, objectFit: "cover" }}
                     />
-                    <Text className="text-2xl text-[#428288] font-semibold">
+                    <Text
+                      style={{
+                        fontSize: 28,
+                        color: "#428288",
+                        fontWeight: "bold",
+                      }}
+                    >
                       Opps...No Data Found
                     </Text>
                   </View>
