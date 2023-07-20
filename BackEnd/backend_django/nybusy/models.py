@@ -74,6 +74,9 @@ class POI(models.Model):
         ordering = ['addr_housenumber', 'addr_street', 'addr_city', 'addr_postcode', 'description', 'name',
                     'opening_hours', 'tags', 'website', 'longitude', 'latitude', 'location_id', 'zone', 'geometry']
 
+class POIImage(models.Model):
+    image = models.ImageField(upload_to='images/', null=True, blank=True)
+    poi = models.ForeignKey(POI, related_name='images', on_delete=models.CASCADE)
 
 class UserBucketlist(models.Model):
     user = models.OneToOneField(get_user_model(), on_delete=models.CASCADE)

@@ -2,11 +2,9 @@ from django.shortcuts import render
 from rest_framework.decorators import action
 from rest_framework import viewsets, permissions, status
 from rest_framework.response import Response
-from nybusy.models import POI, UserBucketlist
-# Assuming you have a serializer for your POI model
+from nybusy.models import POI, UserBucketlist, POIImage   # add this line
 from bucketlist.serializers import UserBucketlistSerializer
-from .serializers import POISerializer
-
+from .serializers import POISerializer, POIImageSerializer  # add POIImageSerializer here
 
 class POIViewSet(viewsets.ModelViewSet):
     queryset = POI.objects.all()
@@ -27,6 +25,18 @@ class POIViewSet(viewsets.ModelViewSet):
             poi.liked_by.add(request.user)
             UserBucketlist.objects.create(user=request.user, poi=poi)
             return Response(status=status.HTTP_201_CREATED)
+
+
+class POIImageViewSet(viewsets.ModelViewSet):   # add this class
+    queryset = POIImage.objects.all()
+    serializer_class = POIImageSerializer
+    permission_classes = [permissions.AllowAny]  # adjust as needed
+
+    def list(self, request, poi_id=None):
+        queryset = self.queryset.filter(poi_id=poi_id)
+        serializer = self.serializer_class(queryset, many=True)
+
+        return Response(serializer.data)
 
     # def partial_update(self, request, *args, **kwargs):
     #     # change permission for this particular action

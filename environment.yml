@@ -28,4 +28,6 @@ dependencies:
   - zlib
   - djangorestframework==3.14.0
   - drf-spectacular>=0.15.1
+  - request
+  - Pillow
 prefix: /home/student/miniconda3/envs/busyenv
