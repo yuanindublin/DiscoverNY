@@ -59,14 +59,20 @@ class POI(models.Model):
     description = models.TextField(blank=True, null=True)
     name = models.CharField(max_length=255)
     opening_hours = models.CharField(max_length=255, null=True, blank=True)
-    tags = models.ManyToManyField(Tag, related_name='pois')
+    tags = models.CharField(max_length=255, null=True, blank=True)
     website = models.URLField(max_length=255, null=True, blank=True)
     longitude = models.FloatField()
     latitude = models.FloatField()
     location_id = models.IntegerField()
     zone = models.CharField(max_length=255)
     geometry = models.CharField(max_length=255)
-    liked_by = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='liked_pois')
+    rating = models.FloatField(blank=True)
+
+    # liked_by = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='liked_pois')
+
+    class Meta:
+        ordering = ['addr_housenumber', 'addr_street', 'addr_city', 'addr_postcode', 'description', 'name',
+                    'opening_hours', 'tags', 'website', 'longitude', 'latitude', 'location_id', 'zone', 'geometry']
 
 
 class UserBucketlist(models.Model):
