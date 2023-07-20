@@ -47,17 +47,36 @@ class User(AbstractBaseUser, PermissionsMixin,):
 
     USERNAME_FIELD = 'email'
 
+class Tag(models.Model):
+    name = models.CharField(max_length=200)
+
 
 class POI(models.Model):
-    name = models.CharField(max_length=255)
+    addr_housenumber = models.CharField(max_length=255, null=True, blank=True)
+    addr_street = models.CharField(max_length=255, null=True, blank=True)
+    addr_city = models.CharField(max_length=255, null=True, blank=True)
+    addr_postcode = models.CharField(max_length=255, null=True, blank=True)
     description = models.TextField(blank=True, null=True)
-    latitude = models.FloatField()
+    name = models.CharField(max_length=255)
+    opening_hours = models.CharField(max_length=255, null=True, blank=True)
+    tags = models.CharField(max_length=255, null=True, blank=True)
+    website = models.URLField(max_length=255, null=True, blank=True)
     longitude = models.FloatField()
-    address = models.CharField(max_length=255, null=True)
-    opening_hours = models.FloatField()
-    category = models.CharField(max_length=255)
-    liked_by = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='liked_pois')
+    latitude = models.FloatField()
+    location_id = models.IntegerField()
+    zone = models.CharField(max_length=255)
+    geometry = models.CharField(max_length=255)
+    rating = models.FloatField(blank=True)
 
+    # liked_by = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='liked_pois')
+
+    class Meta:
+        ordering = ['addr_housenumber', 'addr_street', 'addr_city', 'addr_postcode', 'description', 'name',
+                    'opening_hours', 'tags', 'website', 'longitude', 'latitude', 'location_id', 'zone', 'geometry']
+
+class POIImage(models.Model):
+    image = models.ImageField(upload_to='images/', null=True, blank=True)
+    poi = models.ForeignKey(POI, related_name='images', on_delete=models.CASCADE)
 
 class UserBucketlist(models.Model):
     user = models.OneToOneField(get_user_model(), on_delete=models.CASCADE)
