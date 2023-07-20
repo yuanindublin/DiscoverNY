@@ -30,4 +30,5 @@ dependencies:
   - drf-spectacular>=0.15.1
   - request
   - Pillow
+  - os
 prefix: /home/student/miniconda3/envs/busyenv

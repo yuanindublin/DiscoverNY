@@ -82,3 +82,14 @@ class UserBucketlist(models.Model):
     user = models.OneToOneField(get_user_model(), on_delete=models.CASCADE)
     pois = models.ManyToManyField(POI)
 
+class WeatherData(models.Model):
+    time = models.DateTimeField(null=True)
+    temperature = models.FloatField(null=True)
+    humidity = models.FloatField(null=True)
+    dewpoint = models.FloatField(null=True)
+    apparent_temperature = models.FloatField(null=True)
+    precipitation_probability = models.FloatField(null=True)
+    rain = models.FloatField(null=True)
+    snowfall = models.FloatField(null=True)
+    cloudcover = models.FloatField(null=True)
+
