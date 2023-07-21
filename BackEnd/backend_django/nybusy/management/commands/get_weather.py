@@ -13,6 +13,8 @@ class Command(BaseCommand):
             time.sleep(4 * 60 * 60)  # 4 hours in seconds
 
     def get_weather_data(self):
+        WeatherData.objects.all().delete()
+
         url = "https://api.open-meteo.com/v1/forecast?latitude=40.8&longitude=-74&hourly=temperature_2m,relativehumidity_2m,dewpoint_2m,apparent_temperature,precipitation_probability,rain,snowfall,cloudcover&forecast_days=16"
 
         try:
