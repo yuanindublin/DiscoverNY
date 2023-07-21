@@ -31,9 +31,10 @@ urlpatterns = [
         SpectacularSwaggerView.as_view(url_name='api-schema'),
         name='api-docs'
     ),
-    path('api/POIs/', include('POIs.urls')),  # Assuming your POI app is named 'pois'
+    path('api/POIs/', include('POIs.urls')),
     path('api/bucketlist/', include('bucketlist.urls')),
     path('api/user/', include('user.urls')),
+    path('api/', include('weather.urls')),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
