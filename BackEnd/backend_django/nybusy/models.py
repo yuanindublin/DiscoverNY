@@ -47,8 +47,6 @@ class User(AbstractBaseUser, PermissionsMixin,):
 
     USERNAME_FIELD = 'email'
 
-class Tag(models.Model):
-    name = models.CharField(max_length=200)
 
 
 class POI(models.Model):
