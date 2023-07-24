@@ -31,4 +31,7 @@ dependencies:
   - request
   - Pillow
   - os
+  - pandas
+  - django-pandas
+
 prefix: /home/student/miniconda3/envs/busyenv
