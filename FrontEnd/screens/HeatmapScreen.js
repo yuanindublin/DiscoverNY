@@ -170,34 +170,34 @@ const HeatMapScreen = () => {
   // Render the map for web
   return (
     <View>
-      {isMobile ? (
-        <MapView
-          provider={PROVIDER_GOOGLE}
-          style={{
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            borderRadius: 16,
-          }}
+      {/* {isMobile ? ( */}
+      <MapView
+        provider={PROVIDER_GOOGLE}
+        style={{
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          borderRadius: 16,
+        }}
+        region={mapRegion}
+      >
+        {/* {renderMarkers()} */}
+        <Heatmap
           region={mapRegion}
-        >
-          {/* {renderMarkers()} */}
-          <Heatmap
-            region={mapRegion}
-            points={pois.map((poi) => ({
-              latitude: poi.latitude,
-              longitude: poi.longitude,
-              weight: poi.id,
-            }))}
-            radius={50}
-            gradient={{
-              colors: ["green", "orange", "yellow", "red", "white"],
-              startPoints: [0.01, 0.04, 0.1, 0.45, 0.5],
-              colorMapSize: 100,
-            }}
-          ></Heatmap>
-        </MapView>
-      ) : (
+          points={pois.map((poi) => ({
+            latitude: poi.coordinate.latitude,
+            longitude: poi.coordinate.longitude,
+            weight: poi.id, //need to be update to busyness index
+          }))}
+          radius={50}
+          gradient={{
+            colors: ["green", "orange", "yellow", "red", "white"],
+            startPoints: [0.01, 0.04, 0.1, 0.45, 0.5],
+            colorMapSize: 100,
+          }}
+        ></Heatmap>
+      </MapView>
+      {/* ) : (
         <LoadScript googleMapsApiKey="AIzaSyBCc1BjkGUYR-w4mQOxXfPHorN9zwWXlvI">
           <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
             <View
@@ -221,7 +221,7 @@ const HeatMapScreen = () => {
             </View>
           </SafeAreaView>
         </LoadScript>
-      )}
+      )} */}
     </View>
   );
 };

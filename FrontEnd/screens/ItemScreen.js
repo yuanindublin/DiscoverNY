@@ -10,12 +10,15 @@ import React, { useLayoutEffect, useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { FontAwesome, FontAwesome5, MaterialIcons } from "@expo/vector-icons";
 import MapView, { Marker } from "react-native-maps";
-// import {
-//   GoogleMap,
-//   useLoadScript,
-//   LoadScript,
-//   Marker,
-// } from "@react-google-maps/api";
+// Add Cart
+import { useDispatch, useSelector } from "react-redux";
+import store from "../components/CartStore";
+import {
+  addToCart,
+  decrementQuantity,
+  incrementQuantity,
+  removeFromCart,
+} from "../components/CartReducer";
 
 const ItemScreen = ({ route }) => {
   const navigation = useNavigation();
@@ -33,8 +36,29 @@ const ItemScreen = ({ route }) => {
     latitudeDelta: 0.0421,
     longitudeDelta: 0.021,
   });
+  console.log(mapRegion);
+
+  //Add Cart
+  const cart = useSelector((state) => state.cart.cart);
+  console.log(cart);
+  const dispatch = useDispatch();
+  const addItemToCart = (item) => {
+    dispatch(addToCart(item));
+  };
+  const [item, setItem] = useState({
+    name: data?.name,
+
+    // imageSrc={
+    //   data?.photo?.images?.medium?.url
+    //     ? data?.photo?.images?.medium?.url
+    //     : "https://cdn.pixabay.com/photo/2015/10/30/12/22/eat-1014025_1280.jpg"
+    // }
+    // title={data?.name}
+  });
+  console.log(item);
 
   return (
+    // <Provider store={store}>
     <SafeAreaView className="flex-1 bg-white relative">
       <ScrollView className="flex-1 px-4 py-6">
         <View className="relative bg-white shadow-lg">
@@ -180,15 +204,17 @@ const ItemScreen = ({ route }) => {
               <Text className="text-lg">{data?.address}</Text>
             </View>
           )}
-
-          <View className="mt-4 px-4 py-4 rounded-lg bg-[#06B2BE] items-center justify-center mb-12">
-            <Text className="text-3xl font-semibold uppercase tracking-wider text-gray-100">
-              Add Now
-            </Text>
-          </View>
+          <TouchableOpacity onPress={() => addItemToCart(item)}>
+            <View className="mt-4 px-4 py-4 rounded-lg bg-[#06B2BE] items-center justify-center mb-12">
+              <Text className="text-3xl font-semibold uppercase tracking-wider text-gray-100">
+                Add Now
+              </Text>
+            </View>
+          </TouchableOpacity>
         </View>
       </ScrollView>
     </SafeAreaView>
+    // </Provider>
   );
 };
 
