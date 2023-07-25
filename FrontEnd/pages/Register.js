@@ -22,7 +22,8 @@ function Register({ navigation, route, props }) {
   function handleRegister(email, password) {
     setError("");
     axios
-      .post(`http://127.0.0.1:8000/api/user/create/`, {
+      .post(`http://18.233.101.78:8000/api/user/create/`, {
+        // .post(`http://127.0.0.1:8000/api/user/create/`, {
         name,
         email,
         password,
