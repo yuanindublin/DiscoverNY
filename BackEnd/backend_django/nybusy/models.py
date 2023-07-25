@@ -1,6 +1,7 @@
 """ Database models"""
 from django.contrib.auth import get_user_model
 from django.db import models
+from django.contrib.gis.db import models
 from django.contrib.auth.models import (
     AbstractBaseUser,
     BaseUserManager,
@@ -48,7 +49,6 @@ class User(AbstractBaseUser, PermissionsMixin,):
     USERNAME_FIELD = 'email'
 
 
-
 class POI(models.Model):
     addr_housenumber = models.CharField(max_length=255, null=True, blank=True)
     addr_street = models.CharField(max_length=255, null=True, blank=True)
@@ -72,13 +72,17 @@ class POI(models.Model):
         ordering = ['addr_housenumber', 'addr_street', 'addr_city', 'addr_postcode', 'description', 'name',
                     'opening_hours', 'tags', 'website', 'longitude', 'latitude', 'location_id', 'zone', 'geometry']
 
+
 class POIImage(models.Model):
     image = models.ImageField(upload_to='images/', null=True, blank=True)
-    poi = models.ForeignKey(POI, related_name='images', on_delete=models.CASCADE)
+    poi = models.ForeignKey(POI, related_name='images',
+                            on_delete=models.CASCADE)
+
 
 class UserBucketlist(models.Model):
     user = models.OneToOneField(get_user_model(), on_delete=models.CASCADE)
     pois = models.ManyToManyField(POI)
+
 
 class WeatherData(models.Model):
     time = models.DateTimeField(null=True)
@@ -91,3 +95,14 @@ class WeatherData(models.Model):
     snowfall = models.FloatField(null=True)
     cloudcover = models.FloatField(null=True)
 
+
+class TaxiZone(models.Model):
+    some_id = models.IntegerField()
+    shape_area = models.FloatField(null=True)
+    objectid = models.IntegerField()
+    shape_leng = models.FloatField(null=True)
+    location_id = models.IntegerField()
+    zone = models.CharField(max_length=255)
+    borough = models.CharField(max_length=255)
+    geometry = models.GeometryField()
+    busy_level = models.FloatField(null=True)
