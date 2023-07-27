@@ -45,14 +45,13 @@ class Command(BaseCommand):
             for zone in zones:
                 row_data = row.values.tolist()
                 row_data.append(zone)  # Add the DOLocationID to the feature data
-                row_data.append(1)  # Add 'trip_distance' to the feature data
                 x_features.append(row_data)
                 LocationID.append(zone)
                 times.append(row['time'])
 
         logging.info("Finished fetching features.")
 
-        return pd.DataFrame(x_features, columns=df.columns.tolist() + ['LocationID', 'trip_distance']), LocationID, times
+        return pd.DataFrame(x_features, columns=df.columns.tolist() + ['LocationID']), LocationID, times
 
     def handle(self, *args, **kwargs):
         for _ in range(1):
@@ -62,44 +61,52 @@ class Command(BaseCommand):
 
             # Load the model
             logging.info("Loading the model...")
-            model = load_model(r'G:\Users\98692\Documents\GitHub\comp47360\COMP47360\Data\transport_random_forest')
+            model_taxi_only = load_model(r'G:\Users\98692\Documents\GitHub\comp47360\COMP47360\Data\taxi_random_forest')
+            model_taxi_subway = load_model(r'G:\Users\98692\Documents\GitHub\comp47360\COMP47360\Data\transport_random_forest')
 
             # Define zones
             taxi_only_zones = [4, 13, 50, 68, 137, 140, 158, 170, 211, 224, 233, 262, 12, 194, 128, 120, 103]
             zones_with_subway = [24, 41, 42, 43, 45, 48, 74, 75, 79, 87, 88, 90, 100, 107, 113, 114, 116, 125, 127, 141, 142, 143, 144, 148, 151, 152, 153, 161, 162, 163, 164, 166, 186, 202, 209, 229, 230, 231, 232, 234, 236, 237, 238, 239, 243, 244, 246, 249, 261, 263]
 
             # Get the data
-            df_taxi_only, DOLocations_taxi_only, times_taxi_only = self.get_features(taxi_only_zones)
-            df_taxi_subway, DOLocations_taxi_subway, times_taxi_subway = self.get_features(zones_with_subway)
+            df_taxi_only, Locations_taxi_only, times_taxi_only = self.get_features(taxi_only_zones)
+            df_taxi_subway, Locations_taxi_subway, times_taxi_subway = self.get_features(zones_with_subway)
 
             # Combine the data
             df = pd.concat([df_taxi_only, df_taxi_subway])
-            LocationID = DOLocations_taxi_only + DOLocations_taxi_subway
-            times = times_taxi_only + times_taxi_subway
 
 
             # Make the prediction
-            logging.info("Making predictions...")
-            print(df.head())
-            df = df.drop(['id'], axis=1)
-            predictions = model.predict(df)
-            print("=========================================")
-            for i in predictions:
-                print(i)
-            print("=========================================")
+
+            df_taxi_only = df_taxi_only.drop(['id'], axis=1)
+            df_taxi_subway = df_taxi_subway.drop(['id'], axis=1)
+            predictions_taxi_only = model_taxi_only.predict(df_taxi_only)
+            predictions_taxi_subway = model_taxi_only.predict(df_taxi_subway)
+
 
             # Save the predictions
             logging.info("Saving predictions...")
-            for idx in range(len(predictions)):
-                i = predictions[idx]
-                location = LocationID[idx]
-                time = times[idx]
+            for idx in range(len(predictions_taxi_only)):
+                i = predictions_taxi_only[idx]
+                location = Locations_taxi_only[idx]
+                time = times_taxi_only[idx]
                 print(i)
                 prediction_data = PredictZone()  # Create a new instance in each loop
                 prediction_data.time = time
                 prediction_data.busylevel = i
                 prediction_data.location_id = TaxiZone.objects.get(
-                    locavtion_id=location)  # Get the TaxiZone instance with the given location_id
+                    location_id=location)  # Get the TaxiZone instance with the given location_id
+                prediction_data.save()
+            for idx in range(len(predictions_taxi_subway)):
+                i = predictions_taxi_subway[idx]
+                location = Locations_taxi_subway[idx]
+                time = times_taxi_subway[idx]
+                print(i)
+                prediction_data = PredictZone()  # Create a new instance in each loop
+                prediction_data.time = time
+                prediction_data.busylevel = i
+                prediction_data.location_id = TaxiZone.objects.get(
+                    location_id=location)  # Get the TaxiZone instance with the given location_id
                 prediction_data.save()
 
             logging.info("Prediction cycle completed.")

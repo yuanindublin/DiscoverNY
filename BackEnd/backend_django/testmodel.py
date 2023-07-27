@@ -29,66 +29,22 @@ data1 = {
     'dayofweek': [2],
     'hour': [14],
     'time': [14],
-    'trip_distance':[10]
-}
-data2 = {
-    'LocationID': [87],
-    'temperature_2m (°C)': [20],
-    'relativehumidity_2m (%)': [30],
-    'dewpoint_2m (°C)': [10],
-    'apparent_temperature (°C)': [22],
-    'precipitation (mm)': [0],
-    'rain (mm)': [0],
-    'snowfall (cm)': [0],
-    'cloudcover (%)': [10],
-    'month': [7],
-    'dayofweek': [2],
-    'hour': [14],
-    'time': [14],
-    'trip_distance':[10]
+
 }
 
-data3 = {
-    'LocationID': [103],
-    'temperature_2m (°C)': [20],
-    'relativehumidity_2m (%)': [30],
-    'dewpoint_2m (°C)': [10],
-    'apparent_temperature (°C)': [22],
-    'precipitation (mm)': [0],
-    'rain (mm)': [0],
-    'snowfall (cm)': [0],
-    'cloudcover (%)': [10],
-    'month': [7],
-    'dayofweek': [2],
-    'hour': [14],
-    'time': [14],
-    'trip_distance':[10]
-}
 
-data4 = {
-    'LocationID': [117],
-    'temperature_2m (°C)': [20],
-    'relativehumidity_2m (%)': [30],
-    'dewpoint_2m (°C)': [10],
-    'apparent_temperature (°C)': [22],
-    'precipitation (mm)': [0],
-    'rain (mm)': [0],
-    'snowfall (cm)': [0],
-    'cloudcover (%)': [10],
-    'month': [7],
-    'dayofweek': [2],
-    'hour': [14],
-    'time': [14],
-    'trip_distance':[10]
-}
 
-# 使用字典创建一个 DataFrame
+train_columns = ['LocationID', 'temperature_2m (°C)', 'relativehumidity_2m (%)', 'dewpoint_2m (°C)', 'apparent_temperature (°C)', 'precipitation (mm)', 'rain (mm)', 'snowfall (cm)', 'cloudcover (%)', 'month', 'dayofweek', 'hour', 'time']
+
+
+
 df1 = pd.DataFrame(data1)
-df2 = pd.DataFrame(data2)
-df3 = pd.DataFrame(data3)
-df4 = pd.DataFrame(data4)
 
-# 使用模型进行预测
+
+
+# df1 = df1[train_columns]
+
+
 
 for step in model_with_pycaret.steps:
     print(step)
@@ -96,11 +52,6 @@ for step in model_with_pycaret.steps:
 
 
 predictions1 = model_with_pycaret.predict(df1)
-predictions2 = model_with_pycaret.predict(df2)
-predictions3 = model_with_pycaret.predict(df3)
-predictions4 = model_with_pycaret.predict(df4)
 
 print(predictions1)
-print(predictions2)
-print(predictions3)
-print(predictions4)
+
