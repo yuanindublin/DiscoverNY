@@ -21,7 +21,8 @@ function Login({ navigation, route, props }) {
   function handleLogin(email, password) {
     setError("");
     axios
-      .post(`http://127.0.0.1:8000/api/user/token/`, {
+      .post(`http://18.233.101.78:8000/api/user/token/`, {
+        // .post(`http://127.0.0.1:8000/api/user/token/`, {
         email,
         password,
       })
@@ -85,9 +86,8 @@ function Login({ navigation, route, props }) {
           <Text style={[fonts().link]}>Register</Text>
         </TouchableOpacity>
 
-
         <Text style={[fonts().inputLabel, margins.topTenPercent]}>
-          Don't wanna login hahahahahahaha{" "}
+          Don't wanna login hahahahaha{" "}
         </Text>
         <TouchableOpacity onPress={() => navigation.navigate("Discover")}>
           <Text style={[fonts().link]}>Skip</Text>
