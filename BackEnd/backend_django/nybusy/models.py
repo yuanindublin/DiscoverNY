@@ -1,7 +1,7 @@
 """ Database models"""
 from django.contrib.auth import get_user_model
 from django.db import models
-from django.contrib.gis.db import models
+
 from django.contrib.auth.models import (
     AbstractBaseUser,
     BaseUserManager,
@@ -49,6 +49,35 @@ class User(AbstractBaseUser, PermissionsMixin,):
     USERNAME_FIELD = 'email'
 
 
+
+class WeatherData(models.Model):
+    time = models.DateTimeField(null=True)
+    temperature = models.FloatField(null=True)
+    humidity = models.FloatField(null=True)
+    dewpoint = models.FloatField(null=True)
+    apparent_temperature = models.FloatField(null=True)
+    precipitation_probability = models.FloatField(null=True)
+    rain = models.FloatField(null=True)
+    snowfall = models.FloatField(null=True)
+    cloudcover = models.FloatField(null=True)
+
+
+class TaxiZone(models.Model):
+    some_id = models.IntegerField()
+    shape_area = models.FloatField(null=True)
+    objectid = models.IntegerField()
+    shape_leng = models.FloatField(null=True)
+    location_id = models.IntegerField(primary_key=True)
+    zone = models.CharField(max_length=255)
+    borough = models.CharField(max_length=255)
+
+class PredictZone(models.Model):
+    location_id = models.ForeignKey(TaxiZone, on_delete=models.SET_NULL, null=True)
+    time = models.DateTimeField(null=True)
+    busylevel = models.FloatField(null=True)
+
+
+
 class POI(models.Model):
     addr_housenumber = models.CharField(max_length=255, null=True, blank=True)
     addr_street = models.CharField(max_length=255, null=True, blank=True)
@@ -61,7 +90,7 @@ class POI(models.Model):
     website = models.URLField(max_length=255, null=True, blank=True)
     longitude = models.FloatField()
     latitude = models.FloatField()
-    location_id = models.IntegerField()
+    location_id = models.ForeignKey(TaxiZone, on_delete=models.SET_NULL, null=True)
     zone = models.CharField(max_length=255)
     geometry = models.CharField(max_length=255)
     rating = models.FloatField(blank=True)
@@ -83,26 +112,3 @@ class UserBucketlist(models.Model):
     user = models.OneToOneField(get_user_model(), on_delete=models.CASCADE)
     pois = models.ManyToManyField(POI)
 
-
-class WeatherData(models.Model):
-    time = models.DateTimeField(null=True)
-    temperature = models.FloatField(null=True)
-    humidity = models.FloatField(null=True)
-    dewpoint = models.FloatField(null=True)
-    apparent_temperature = models.FloatField(null=True)
-    precipitation_probability = models.FloatField(null=True)
-    rain = models.FloatField(null=True)
-    snowfall = models.FloatField(null=True)
-    cloudcover = models.FloatField(null=True)
-
-
-class TaxiZone(models.Model):
-    some_id = models.IntegerField()
-    shape_area = models.FloatField(null=True)
-    objectid = models.IntegerField()
-    shape_leng = models.FloatField(null=True)
-    location_id = models.IntegerField()
-    zone = models.CharField(max_length=255)
-    borough = models.CharField(max_length=255)
-    geometry = models.GeometryField()
-    busy_level = models.FloatField(null=True)

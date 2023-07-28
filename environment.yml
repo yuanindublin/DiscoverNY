@@ -33,5 +33,7 @@ dependencies:
   - os
   - pandas
   - django-pandas
+  - pycaret
+
 
 prefix: /home/student/miniconda3/envs/busyenv

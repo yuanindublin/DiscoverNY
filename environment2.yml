@@ -1,0 +1,30 @@
+name: busyenv2
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+
+  - python==3.9
+  - pycaret==3.0.4
+  - lightgbm==3.3.5
+  - asgiref
+  - certifi
+  - django
+  - flit-core
+  - nodejs
+  - psycopg2
+  - tk
+  - djangorestframework==3.14.0
+  - drf-spectacular>=0.15.1
+  - requests
+  - pandas
+  - django-pandas
+  - scikit-learn
+
+
+
+
+
+
+
+prefix: /home/student/miniconda3/envs/busyenv2
