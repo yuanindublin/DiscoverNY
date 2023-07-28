@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     "user",
     "bucketlist",
     "POIs",
-    "weather"
+    "weather",
+    "prediction"
 ]
 
 MIDDLEWARE = [
