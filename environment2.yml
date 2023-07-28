@@ -1,4 +1,4 @@
-name: busyenv2
+name: comp47360_env2
 channels:
   - conda-forge
   - defaults
@@ -27,4 +27,3 @@ dependencies:
 
 
 
-prefix: /home/student/miniconda3/envs/busyenv2
