@@ -15,7 +15,8 @@ class Command(BaseCommand):
     def get_features(self, zones):
         logging.info("Fetching features...")
         # get data from database
-        data = WeatherData.objects.all().values()
+        data = WeatherData.objects.all().values('time','temperature', 'humidity', 'dewpoint', 'apparent_temperature', 'precipitation_probability', 'rain', 'snowfall', 'cloudcover')
+
         df = pd.DataFrame.from_records(data)
 
         # rename columns to match model training names
@@ -78,8 +79,7 @@ class Command(BaseCommand):
 
             # Make the prediction
 
-            df_taxi_only = df_taxi_only.drop(['id'], axis=1)
-            df_taxi_subway = df_taxi_subway.drop(['id'], axis=1)
+
             predictions_taxi_only = model_taxi_only.predict(df_taxi_only)
             predictions_taxi_subway = model_taxi_only.predict(df_taxi_subway)
 

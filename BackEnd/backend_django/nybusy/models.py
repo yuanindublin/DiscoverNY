@@ -60,6 +60,8 @@ class WeatherData(models.Model):
     rain = models.FloatField(null=True)
     snowfall = models.FloatField(null=True)
     cloudcover = models.FloatField(null=True)
+    windspeed = models.FloatField(null=True)
+    weathercode = models.FloatField(null=True)
 
 
 class TaxiZone(models.Model):

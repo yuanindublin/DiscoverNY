@@ -12,7 +12,7 @@ import pandas as pd
 from pycaret.regression import load_model
 
 
-model_with_pycaret = load_model(r'G:\Users\98692\Documents\GitHub\comp47360\COMP47360\Data\transport_random_forest')
+model_with_pycaret = load_model(r'G:\Users\98692\Documents\GitHub\comp47360\COMP47360\Data\taxi_random_forest')
 
 
 data1 = {
@@ -29,6 +29,7 @@ data1 = {
     'dayofweek': [2],
     'hour': [14],
     'time': [14],
+
 
 }
 

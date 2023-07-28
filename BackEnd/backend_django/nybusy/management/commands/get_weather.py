@@ -15,7 +15,7 @@ class Command(BaseCommand):
     def get_weather_data(self):
         WeatherData.objects.all().delete()
 
-        url = "https://api.open-meteo.com/v1/forecast?latitude=40.8&longitude=-74&hourly=temperature_2m,relativehumidity_2m,dewpoint_2m,apparent_temperature,precipitation_probability,rain,snowfall,cloudcover&forecast_days=16"
+        url = "https://api.open-meteo.com/v1/forecast?latitude=40.8&longitude=-74&hourly=temperature_2m,relativehumidity_2m,dewpoint_2m,apparent_temperature,precipitation_probability,rain,snowfall,cloudcover,weathercode,windspeed_10m&forecast_days=16"
 
         try:
             response = requests.get(url)
@@ -36,6 +36,10 @@ class Command(BaseCommand):
             rain_data = data.get("hourly", {}).get("rain", [])
             snowfall_data = data.get("hourly", {}).get("snowfall", [])
             cloudcover_data = data.get("hourly", {}).get("cloudcover", [])
+            weathercode_data = data.get("hourly", {}).get("weathercode", [])
+            windspeed_data = data.get("hourly", {}).get("windspeed_10m", [])
+
+
 
             for i in range(len(hourly_data)):
                 time_data = datetime.fromisoformat(hourly_data[i])
@@ -47,6 +51,8 @@ class Command(BaseCommand):
                 rain = rain_data[i]
                 snowfall = snowfall_data[i]
                 cloudcover = cloudcover_data[i]
+                weathercode = weathercode_data[i]
+                windspeed = windspeed_data[i]
 
                 weather_data = WeatherData(
                     time=time_data,
@@ -57,7 +63,9 @@ class Command(BaseCommand):
                     precipitation_probability=precipitation_probability,
                     rain=rain,
                     snowfall=snowfall,
-                    cloudcover=cloudcover
+                    cloudcover=cloudcover,
+                    weathercode=weathercode,
+                    windspeed=windspeed
                 )
                 weather_data.save()
 
