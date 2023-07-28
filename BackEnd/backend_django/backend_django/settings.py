@@ -26,7 +26,8 @@ SECRET_KEY = "django-insecure-!bq#6pw)b4+vo)ic4nciya38kwp6wt!%&#r58eyr63)(1a6hop
 DEBUG = True
 
 ALLOWED_HOSTS = ['csi6220-4-vm1.ucd.ie',
-                 'localhost']
+                 'localhost',
+                 '127.0.0.1']
 
 
 # Application definition
@@ -144,3 +145,5 @@ REST_FRAMEWORK = {
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+ 
+CORS_ORIGIN_ALLOW_ALL = True
