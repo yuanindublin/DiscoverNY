@@ -15,6 +15,7 @@ from pycaret.regression import load_model
 model_with_pycaret = load_model(r'G:\Users\98692\Documents\GitHub\comp47360\COMP47360\Data\taxi_random_forest')
 
 
+
 data1 = {
     'LocationID': [234],
     'temperature_2m (°C)': [20],
@@ -47,6 +48,7 @@ df1 = pd.DataFrame(data1)
 
 
 
+
 for step in model_with_pycaret.steps:
     print(step)
 
@@ -54,5 +56,7 @@ for step in model_with_pycaret.steps:
 
 predictions1 = model_with_pycaret.predict(df1)
 
+
 print(predictions1)
+
 

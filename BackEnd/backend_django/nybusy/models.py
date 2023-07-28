@@ -64,6 +64,7 @@ class WeatherData(models.Model):
     weathercode = models.FloatField(null=True)
 
 
+
 class TaxiZone(models.Model):
     some_id = models.IntegerField()
     shape_area = models.FloatField(null=True)
