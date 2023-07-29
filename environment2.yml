@@ -5,7 +5,10 @@ channels:
 dependencies:
 
   - python==3.9
-  - pycaret==3.0.4
+  - pip
+  - pip:
+    - pycaret==3.0.4
+    - django-cors-headers
   - lightgbm==3.3.5
   - asgiref
   - certifi
