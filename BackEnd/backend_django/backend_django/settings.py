@@ -46,11 +46,9 @@ INSTALLED_APPS = [
     "bucketlist",
     "POIs",
     "weather",
-    "prediction"
+    "prediction",
+    'django.contrib.gis'
 ]
-
-CORS_ALLOW_ALL_ORIGINS = True
-
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -91,7 +89,7 @@ WSGI_APPLICATION = "backend_django.wsgi.application"
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': 'newyorkbusy',
         'USER': 'db4comp47360',
         'PASSWORD': 'researchpracticum',
@@ -150,3 +148,6 @@ REST_FRAMEWORK = {
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+GDAL_LIBRARY_PATH = r'F:\Users\98692\anaconda3\envs\busyenv2\Library\bin\gdal.dll'
+

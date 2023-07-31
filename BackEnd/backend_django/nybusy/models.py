@@ -1,6 +1,8 @@
 """ Database models"""
 from django.contrib.auth import get_user_model
 from django.db import models
+from osgeo import gdal
+from django.contrib.gis.db import models as gis_models
 
 from django.contrib.auth.models import (
     AbstractBaseUser,
@@ -73,6 +75,7 @@ class TaxiZone(models.Model):
     location_id = models.IntegerField(primary_key=True)
     zone = models.CharField(max_length=255)
     borough = models.CharField(max_length=255)
+    geometry = gis_models.GeometryField(null=True)
 
 class PredictZone(models.Model):
     location_id = models.ForeignKey(TaxiZone, on_delete=models.SET_NULL, null=True)
@@ -98,6 +101,7 @@ class POI(models.Model):
     geometry = models.CharField(max_length=255)
     rating = models.FloatField(blank=True)
 
+
     # liked_by = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='liked_pois')
 
     class Meta:
@@ -109,6 +113,12 @@ class POIImage(models.Model):
     image = models.ImageField(upload_to='images/', null=True, blank=True)
     poi = models.ForeignKey(POI, related_name='images',
                             on_delete=models.CASCADE)
+    imageID= models.IntegerField(null=True)
+
+class PredictPOI(models.Model):
+    poi = models.ForeignKey(POI, on_delete=models.SET_NULL, null=True)
+    time = models.DateTimeField(null=True)
+    busylevel = models.FloatField(null=True)
 
 
 class UserBucketlist(models.Model):
