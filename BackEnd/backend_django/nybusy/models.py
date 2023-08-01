@@ -76,6 +76,9 @@ class TaxiZone(models.Model):
     zone = models.CharField(max_length=255)
     borough = models.CharField(max_length=255)
     geometry = gis_models.GeometryField(null=True)
+    twenty_five_percentile = models.FloatField(null=True)
+    fifty_percentile = models.FloatField(null=True)
+    seventy_five_percentile = models.FloatField(null=True)
 
 class PredictZone(models.Model):
     location_id = models.ForeignKey(TaxiZone, on_delete=models.SET_NULL, null=True)
