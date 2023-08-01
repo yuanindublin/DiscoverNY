@@ -1,4 +1,4 @@
-export const statesData = {
+export const taxizonesData = {
   type: "FeatureCollection",
   features: [
     {

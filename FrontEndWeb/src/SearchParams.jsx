@@ -2,52 +2,85 @@
 import FormData from "form-data";
 
 // import { useState, useEffect } from "react";
-import { useState, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useQuery } from "@tanstack/react-query";
 import fetchSearch from "./fetchSearch";
-// import Pet from "./Pet";
-import useBreedList from "./useBreedList";
+import Poi from "./Poi";
 import Results from "./Results";
-import AdoptedPetContext from "./AdoptedPetContext";
+// import useCategoryList from "./useCategoryList";
+// import Results from "./Results";
+// import AdoptedPetContext from "./AdoptedPetContext";
+import axios from "axios";
 
 // let counter = 0;
-const ANIMALS = ["bird", "cat", "dog", "rabbit", "reptile"];
+// const ANIMALS = ["bird", "cat", "dog", "rabbit", "reptile"];
+const INTERESTS = ["POIs", "Events", "Restaurants", "Hotels"];
+// const INTERESTS = ["POIs"];
+// const INTERESTS = ["museum", "gallery", "Restaurants", "Hotels"];
+const categories = [
+  "museum",
+  "park",
+  "attraction",
+  "theatre",
+  "zoo",
+  "entertainment",
+  "shopping",
+  "gallery",
+  "library",
+];
 
 const SearchPramas = () => {
-  // const location = "Seattle,WA";
+  // const location = "New York";
   // counter++;
-  // const [location, setLocation] = useState("");
+  const [location, setLocation] = useState("");
   // const locationHook = useState("");
   // const location = locationHook[0];
   // const setLocation = locationHook[1];
-  const [animal, setAnimal] = useState("");
-  // const [breed, setBreed] = useState("");
-  // const [pets, setPets] = useState([]);
-  // const breeds = ["Poodle"];
-  const [breeds] = useBreedList(animal);
-  const [adoptedPet] = useContext(AdoptedPetContext);
+  const [interests, setInterests] = useState("");
+  const [category, setCategory] = useState("");
+  const [pois, setPois] = useState([]);
+  // const categories = ["museum"];
+  // const [categories] = useCategoryList(interests);
+  // const [adoptedP et] = useContext(AdoptedPetContext);
 
   const [requestParams, setRequesParams] = useState({
     location: "",
-    animal: "",
-    breed: "",
+    interests: "",
+    category: "",
   });
 
-  // useEffect(() => {
-  //   requestPets();
-  // }, []); // eslint-disable-next-line react-hooks/exhaustive-deps
+  const [error, setError] = useState("");
+  useEffect(() => {
+    requestPois();
+  }, []); // eslint-disable-next-line react-hooks/exhaustive-deps
 
-  // async function requestPets() {
-  //   const res = await fetch(
-  //     `http://pets-v2.dev-apis.com/pets?animal=${animal}&location=${location}&breed=${breed}`
-  //   );
-  //   const json = await res.json();
+  async function requestPois() {
+    if (category) {
+      try {
+        // Fetch the API response to get the URL for the selected category
+        // const response = await axios.get(
+        //   `http://127.0.0.1:8000/api/POIs/tag/${category}`
+        // );
+        const response = await axios.get(`http://127.0.0.1:8000/api/POIs/tag/`);
+        const categoryURL = response.data[category];
 
-  //   setPets(json.pets);
-  // }
+        // Fetch the data for the selected category using the categoryURL
+        const res = await axios.get(categoryURL);
+        const poisInfo = res.data;
 
-  const results = useQuery(["search", requestParams], fetchSearch);
-  const pets = results?.data?.pets ?? [];
+        // const json = JSON.stringify(poisInfo);
+        // setPois(json.pois);
+        setPois(poisInfo);
+      } catch (error) {
+        console.error("Fetch error", error);
+      }
+    } else {
+      console.log("Please select a category.");
+    }
+  }
+
+  // const results = useQuery(["search", requestParams], fetchSearch);
+  // const pets = results?.data?.pets ?? [];
 
   return (
     <div className="search-params">
@@ -55,75 +88,78 @@ const SearchPramas = () => {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          // requestPets();
-          const formData = new FormData(e.target);
-          const obj = {
-            animal: formData.get("animal") ?? "",
-            breed: formData.get("breed") ?? "",
-            location: formData.get("location") ?? "",
-          };
-          setRequesParams(obj);
+          requestPois();
+          // const formData = new FormData(e.target);
+          // const obj = {
+          //   animal: formData.get("animal") ?? "",
+          //   breed: formData.get("breed") ?? "",
+          //   location: formData.get("location") ?? "",
+          // };
+          // setRequesParams(obj);
         }}
       >
-        {adoptedPet ? (
+        {/* {adoptedPet ? (
           <div className="pet image-container">
             <img src={adoptedPet.images[0]} alt={adoptedPet.name} />
           </div>
-        ) : null}
+        ) : null} */}
         <label htmlFor="locatons">
           Location
           <input
-            // onChange={(e) => setLocation(e.target.value)}
+            onChange={(e) => setLocation(e.target.value)}
             id="location"
-            name="location"
-            // value={location}
+            // name="location"
+            value={location}
             placeholder="Location"
           />
         </label>
-        <label htmlFor="animal">
-          Animal
+        <label htmlFor="interests">
+          Interests
           <select
-            id="animal"
-            value={animal}
+            id="interests"
+            value={interests}
+            // placeholder="Interests"
             onChange={(e) => {
-              setAnimal(e.target.value);
-              // setBreed("");
+              setInterests(e.target.value);
+              // setCategory("");
             }}
           >
             <option />
-            {ANIMALS.map((animal) => (
-              <option key={animal}>{animal}</option>
+            {INTERESTS.map((interests) => (
+              <option key={interests}>{interests}</option>
             ))}
           </select>
         </label>
-        <label htmlFor="breed">
-          Breed
+        <label htmlFor="category">
+          Category
           <select
-            id="breed"
-            disabled={breeds.length === 0}
-            name="breed"
-            // value={breed}
-            // onChange={(e) => {
-            //   setBreed(e.target.value);
-            // }}
+            id="category"
+            // disabled={categories.length === 0} // no length, no show up
+            name="category"
+            value={category}
+            // placeholder="Category"
+            onChange={(e) => {
+              setCategory(e.target.value);
+            }}
           >
             <option />
-            {breeds.map((breed) => (
-              <option key={breed}> {breed}</option>
+            {categories.map((category) => (
+              <option key={category}> {category}</option>
             ))}
           </select>
         </label>
         <button>Submit</button>
       </form>
-      {/* {pets.map((pet) => (
-        <Pet
-          name={pet.name}
-          animal={pet.animal}
-          breed={pet.breed}
-          key={pet.id}
+      {/* {pois.map((poi) => (
+        <Poi
+          name={poi.name}
+          interests="POIs"
+          // interests={poi.animal}
+          category={poi.tags}
+          key={poi.id}
         />
       ))} */}
-      <Results pets={pets} />
+      <Results pois={pois} />
     </div>
   );
 };
