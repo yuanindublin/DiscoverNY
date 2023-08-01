@@ -47,6 +47,6 @@ for poi in pois:
     request_count += 1
 
     # If 30 requests have been sent, pause for an hour
-    if request_count >= 30:
+    if request_count >= 50:
         time.sleep(3600)  # Number of seconds in an hour
         request_count = 0  # Reset the request count

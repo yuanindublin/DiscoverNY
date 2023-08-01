@@ -10,14 +10,19 @@ class PredictZoneSerializer(serializers.ModelSerializer):
         fields = ['time', 'busylevel']
 
     def get_busylevel(self, obj):
-        if obj.busylevel < 25:
-            return 'Not Busy'
-        elif obj.busylevel < 50:
-            return 'A little Busy'
-        elif obj.busylevel < 75:
-            return 'Busy'
+        taxi_zone = obj.location_id
+
+        if taxi_zone.twenty_five_percentile is None or taxi_zone.fifty_percentile is None or taxi_zone.seventy_five_percentile is None:
+            return 'Data Unavailable'
         else:
-            return 'Very Busy'
+            if obj.busylevel < taxi_zone.twenty_five_percentile:
+                return 'Not Busy'
+            elif obj.busylevel < taxi_zone.fifty_percentile:
+                return 'A little Busy'
+            elif obj.busylevel < taxi_zone.seventy_five_percentile:
+                return 'Busy'
+            else:
+                return 'Very Busy'
 
 class TaxiZoneSerializer(serializers.ModelSerializer):
     geometry = serializers.SerializerMethodField()
