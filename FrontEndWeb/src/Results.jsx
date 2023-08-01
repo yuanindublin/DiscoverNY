@@ -1,20 +1,22 @@
-import Pet from "./Pet";
+import Poi from "./Poi";
 
-const Results = ({ pets }) => {
+const Results = ({ pois }) => {
   return (
     <div className="search">
-      {!pets.length ? (
-        <h1>No Pets Found</h1>
+      {!pois.length ? (
+        <h1>No POIs Found</h1>
       ) : (
-        pets.map((pet) => (
-          <Pet
-            animal={pet.animal}
-            key={pet.id}
-            name={pet.name}
-            breed={pet.breed}
-            images={pet.images}
-            location={`${pet.city},${pet.state}`}
-            id={pet.id}
+        pois.map((poi) => (
+          <Poi
+            // interests={poi.interests}
+            interests="POIs"
+            key={poi.id}
+            name={poi.name}
+            category={poi.tags}
+            images={poi.images}
+            // location={`${poi.city},${poi.state}`}
+            location={poi.addr_city}
+            id={poi.id}
           />
         ))
       )}

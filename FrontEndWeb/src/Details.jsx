@@ -2,18 +2,18 @@ import { useState, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import AdoptedPetContext from "./AdoptedPetContext";
-import fetchPet from "./fetchPet";
+import fetchPoi from "./fetchPoi";
 import Carousel from "./Carousel";
 import ErrorBoundary from "./ErrorBoundary";
 import Modal from "./Modal";
 
 const Details = () => {
-  const [showModal, setShowModal] = useState(false);
-  const navigate = useNavigate();
-  // eslint-disable-next-line no-unused-vars
-  const [_, setAdoptedPet] = useContext(AdoptedPetContext);
+  // const [showModal, setShowModal] = useState(false);
+  // const navigate = useNavigate();
+  // // eslint-disable-next-line no-unused-vars
+  // const [_, setAdoptedPet] = useContext(AdoptedPetContext);
   const { id } = useParams();
-  const results = useQuery(["details", id], fetchPet);
+  const results = useQuery(["details", id], fetchPoi);
 
   if (results.isLoading) {
     return (
@@ -23,26 +23,28 @@ const Details = () => {
     );
   }
 
-  const pet = results.data.pets[0];
+  // const poi = results.data.pois[0];
+  const poi = results.data;
 
   return (
+    // <h2>hi{id}</h2>
     // <div onClick={() => alert("hi")} className="details"> // it is so coll!!
     <div className="details">
-      <Carousel images={pet.images} />
+      {/* <Carousel images={poi.images} /> */}
       <div>
-        <h1>{pet.name}</h1>
-        <h2>
-          {pet.animal} - {pet.breed} - {pet.city}, {pet.state}
-          <button onClick={() => setShowModal(true)}>Adopt {pet.name}</button>
-          <p>{pet.description}</p>
+        <h1>{poi.name}</h1>
+        {/* <h2>
+          {poi.interests} - {poi.category} - {poi.location} */}
+        {/* <button onClick={() => setShowModal(true)}>Adopt {poi.name}</button>
+          <p>{poi.description}</p>
           {showModal ? (
             <Modal>
               <div>
-                <h1>Would you like to adope {pet.name} ?</h1>
+                <h1>Would you like to adope {poi.name} ?</h1>
                 <div className="buttons">
                   <button
                     onClick={() => {
-                      setAdoptedPet(pet);
+                      setAdoptedPet(poi);
                       navigate("/");
                     }}
                   >
@@ -52,8 +54,8 @@ const Details = () => {
                 </div>
               </div>
             </Modal>
-          ) : null}
-        </h2>
+          ) : null} */}
+        {/* </h2> */}
       </div>
     </div>
   );
