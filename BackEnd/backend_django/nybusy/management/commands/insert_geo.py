@@ -1,21 +1,21 @@
 import csv
-from django.contrib.gis.geos import GEOSGeometry, GEOSException
 from nybusy.models import TaxiZone
 
-with open(r'G:\Users\98692\Documents\GitHub\comp47360\COMP47360\Data\0000s.csv', 'r') as f:
+with open(r'G:\Users\98692\Documents\GitHub\comp47360\NEW\COMP47360\Data\taxi_percentiles.csv', 'r') as f:
     reader = csv.reader(f)
     next(reader)  # Skip the header row
     for row in reader:
-        location_id = int(row[0])
-        geo_wkt = row[1]
-
-        try:
-            geo = GEOSGeometry(geo_wkt)
-        except GEOSException:
-            print(f"Invalid WKT at location_id {location_id}: {geo_wkt}")
-            continue
+        location_id = int(row[1])  # location_id is the second column in CSV
+        twenty_five_percentile = float(row[2])  # 25th_percentile
+        fifty_percentile = float(row[3])  # 50th_percentile
+        seventy_five_percentile = float(row[4])  # 75th_percentile
 
         # 更新TaxiZone模型
-        tz = TaxiZone.objects.get(location_id=location_id)
-        tz.geometry = geo
-        tz.save()
+        try:
+            tz = TaxiZone.objects.get(location_id=location_id)
+            tz.twenty_five_percentile = twenty_five_percentile
+            tz.fifty_percentile = fifty_percentile
+            tz.seventy_five_percentile = seventy_five_percentile
+            tz.save()
+        except TaxiZone.DoesNotExist:
+            print(f"No TaxiZone with location_id {location_id}")

@@ -3,9 +3,21 @@ from nybusy.models import PredictZone, TaxiZone
 from rest_framework_gis.fields import GeometryField
 
 class PredictZoneSerializer(serializers.ModelSerializer):
+    busylevel = serializers.SerializerMethodField()
+
     class Meta:
         model = PredictZone
         fields = ['time', 'busylevel']
+
+    def get_busylevel(self, obj):
+        if obj.busylevel < 25:
+            return 'Not Busy'
+        elif obj.busylevel < 50:
+            return 'A little Busy'
+        elif obj.busylevel < 75:
+            return 'Busy'
+        else:
+            return 'Very Busy'
 
 class TaxiZoneSerializer(serializers.ModelSerializer):
     geometry = serializers.SerializerMethodField()
@@ -33,5 +45,6 @@ class TaxiZoneSerializer(serializers.ModelSerializer):
     def get_predictzone(self, obj):
         predictzones = PredictZone.objects.filter(location_id=obj.location_id)
         if predictzones:
-            return [PredictZoneSerializer(pz).data for pz in predictzones]
+            serializer = PredictZoneSerializer(predictzones, many=True, context=self.context)
+            return serializer.data
         return None
