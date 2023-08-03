@@ -1,10 +1,11 @@
 from django.shortcuts import render
+from django.db import IntegrityError
 from django.urls import reverse
 from django.http import JsonResponse
 from rest_framework.decorators import action
 from rest_framework import viewsets, permissions, status
 from rest_framework.response import Response
-from nybusy.models import POI, UserBucketlist, POIImage
+from nybusy.models import POI, UserBucketlist, POIImage, UserBucketlistItem
 from bucketlist.serializers import UserBucketlistSerializer
 from .serializers import POISerializer, POIImageSerializer
 
@@ -19,25 +20,27 @@ class POIViewSet(viewsets.ModelViewSet):
 
         if request.user in poi.liked_by.all():
             poi.liked_by.remove(request.user)
-            UserBucketlist.objects.filter(
-                user=request.user, poi=poi).delete()
+            UserBucketlistItem.objects.filter(user=request.user, poi=poi).delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
 
         else:
-            poi.liked_by.add(request.user)
-            UserBucketlist.objects.create(user=request.user, poi=poi)
-            return Response(status=status.HTTP_201_CREATED)
+            try:
+                UserBucketlistItem.objects.create(user=request.user, poi=poi)
+                poi.liked_by.add(request.user)
+                return Response(status=status.HTTP_201_CREATED)
+            except IntegrityError:
+                return Response({"detail": "Already exists."}, status=status.HTTP_400_BAD_REQUEST)
 
     @action(detail=False, methods=['get'])
     def tag(self, request, tag=None):
-        if tag is None:
-            tags = POI.objects.values_list('tags', flat=True).distinct()
-            tag_urls = {tag: request.build_absolute_uri(reverse('poi-tag', args=[tag])) for tag in tags}
-            return JsonResponse(tag_urls)
-        else:
-            pois = POI.objects.filter(tags__icontains=tag)
-            serializer = self.get_serializer(pois, many=True)
-            return Response(serializer.data)
+            if tag is None:
+                tags = POI.objects.values_list('tags', flat=True).distinct()
+                tag_urls = {tag: request.build_absolute_uri(reverse('poi-tag', args=[tag])) for tag in tags}
+                return JsonResponse(tag_urls)
+            else:
+                pois = POI.objects.filter(tags__icontains=tag)
+                serializer = self.get_serializer(pois, many=True)
+                return Response(serializer.data)
 
 class POIImageViewSet(viewsets.ModelViewSet):
     queryset = POIImage.objects.all()

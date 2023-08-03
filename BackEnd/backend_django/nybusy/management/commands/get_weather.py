@@ -15,7 +15,7 @@ class Command(BaseCommand):
     def get_weather_data(self):
         WeatherData.objects.all().delete()
 
-        url = "https://api.open-meteo.com/v1/forecast?latitude=40.8&longitude=-74&hourly=temperature_2m,relativehumidity_2m,dewpoint_2m,apparent_temperature,precipitation_probability,rain,snowfall,cloudcover,weathercode,windspeed_10m&forecast_days=16"
+        url = "https://api.open-meteo.com/v1/forecast?latitude=40.8&longitude=-74&hourly=temperature_2m,relativehumidity_2m,dewpoint_2m,apparent_temperature,precipitation_probability,rain,snowfall,weathercode,cloudcover,windspeed_10m&forecast_days=7"
 
         try:
             response = requests.get(url)

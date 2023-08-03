@@ -9,6 +9,9 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
+from dotenv import load_dotenv
+load_dotenv()
+
 import os
 from pathlib import Path
 
@@ -153,3 +156,4 @@ MEDIA_URL = '/media/'
 
 GDAL_LIBRARY_PATH = r'F:\Users\98692\anaconda3\envs\busyenv2\Library\bin\gdal.dll'
 
+# os.environ['PROJ_LIB'] = "F:\\Users\\98692\\anaconda3\\envs\\busyenv2\\Library\\share\\proj"

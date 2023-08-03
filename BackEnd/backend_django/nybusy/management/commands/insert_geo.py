@@ -10,7 +10,7 @@ with open(r'G:\Users\98692\Documents\GitHub\comp47360\NEW\COMP47360\Data\taxi_pe
         fifty_percentile = float(row[3])  # 50th_percentile
         seventy_five_percentile = float(row[4])  # 75th_percentile
 
-        # 更新TaxiZone模型
+        # update TaxiZone model
         try:
             tz = TaxiZone.objects.get(location_id=location_id)
             tz.twenty_five_percentile = twenty_five_percentile
