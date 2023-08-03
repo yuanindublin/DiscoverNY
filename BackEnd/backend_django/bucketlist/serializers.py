@@ -1,8 +1,13 @@
 from rest_framework import serializers
-from nybusy.models import UserBucketlist
+from nybusy.models import UserBucketlist, UserBucketlistItem
 
 
 class UserBucketlistSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserBucketlist
-        fields = ['user', 'pois']
+        fields = ['user_id', 'pois_id']
+
+class UserBucketlistItemSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserBucketlistItem
+        fields = ['user', 'poi', 'planned_time']

@@ -3,13 +3,13 @@ from nybusy.models import PredictZone, TaxiZone
 from rest_framework_gis.fields import GeometryField
 
 class PredictZoneSerializer(serializers.ModelSerializer):
-    busylevel = serializers.SerializerMethodField()
+    busyindex = serializers.SerializerMethodField()
 
     class Meta:
         model = PredictZone
-        fields = ['time', 'busylevel']
+        fields = ['time', 'busylevel','busyindex']
 
-    def get_busylevel(self, obj):
+    def get_busyindex(self, obj):
         taxi_zone = obj.location_id
 
         if taxi_zone.twenty_five_percentile is None or taxi_zone.fifty_percentile is None or taxi_zone.seventy_five_percentile is None:
@@ -49,7 +49,18 @@ class TaxiZoneSerializer(serializers.ModelSerializer):
 
     def get_predictzone(self, obj):
         predictzones = PredictZone.objects.filter(location_id=obj.location_id)
+
+        # 获取请求的时间查询参数
+        time_str = self.context['request'].query_params.get('time', None)
+        if time_str is not None:
+            from django.utils.dateparse import parse_datetime
+            time_obj = parse_datetime(time_str)
+            if time_obj is not None:
+                # 如果有时间查询参数，那么在查询 PredictZone 时使用这个参数
+                predictzones = predictzones.filter(time=time_obj)
+
         if predictzones:
             serializer = PredictZoneSerializer(predictzones, many=True, context=self.context)
             return serializer.data
+
         return None

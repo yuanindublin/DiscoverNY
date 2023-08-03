@@ -125,6 +125,14 @@ class PredictPOI(models.Model):
 
 
 class UserBucketlist(models.Model):
-    user = models.OneToOneField(get_user_model(), on_delete=models.CASCADE)
-    pois = models.ManyToManyField(POI)
+    user_id = models.OneToOneField(get_user_model(), on_delete=models.CASCADE)
+    pois_id = models.ManyToManyField(POI)
 
+
+class UserBucketlistItem(models.Model):
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+    poi = models.ForeignKey(POI, on_delete=models.CASCADE)
+    planned_time = models.DateTimeField(null=True)
+
+    class Meta:
+        unique_together = ['user', 'poi']
