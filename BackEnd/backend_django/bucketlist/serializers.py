@@ -5,7 +5,7 @@ from nybusy.models import UserBucketlist, UserBucketlistItem
 class UserBucketlistSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserBucketlist
-        fields = ['user_id', 'pois_id']
+        fields = ['user', 'pois']
 
 class UserBucketlistItemSerializer(serializers.ModelSerializer):
     class Meta:

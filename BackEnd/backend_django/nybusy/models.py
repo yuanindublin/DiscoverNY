@@ -127,8 +127,8 @@ class PredictPOI(models.Model):
 
 
 class UserBucketlist(models.Model):
-    user_id = models.OneToOneField(get_user_model(), on_delete=models.CASCADE)
-    pois_id = models.ManyToManyField(POI)
+    user = models.OneToOneField(get_user_model(), on_delete=models.CASCADE)
+    pois = models.ManyToManyField(POI)
 
 
 class UserBucketlistItem(models.Model):
