@@ -12,31 +12,25 @@ import pandas as pd
 from pycaret.regression import load_model
 
 
-model_with_pycaret = load_model(r'G:\Users\98692\Documents\GitHub\comp47360\COMP47360\Data\taxi_random_forest')
+model_with_pycaret = load_model(r'G:\Users\98692\Documents\GitHub\comp47360\NEW\COMP47360\Data\final_decision_tree_model')
 
 
 
 data1 = {
+
     'LocationID': [234],
-    'temperature_2m (°C)': [20],
-    'relativehumidity_2m (%)': [30],
-    'dewpoint_2m (°C)': [10],
-    'apparent_temperature (°C)': [22],
-    'precipitation (mm)': [0],
-    'rain (mm)': [0],
-    'snowfall (cm)': [0],
-    'cloudcover (%)': [10],
+'time': [12],
     'month': [7],
     'dayofweek': [2],
     'hour': [14],
-    'time': [14],
+
 
 
 }
 
 
 
-train_columns = ['LocationID', 'temperature_2m (°C)', 'relativehumidity_2m (%)', 'dewpoint_2m (°C)', 'apparent_temperature (°C)', 'precipitation (mm)', 'rain (mm)', 'snowfall (cm)', 'cloudcover (%)', 'month', 'dayofweek', 'hour', 'time']
+# train_columns = ['LocationID', 'temperature_2m (°C)', 'relativehumidity_2m (%)', 'dewpoint_2m (°C)', 'apparent_temperature (°C)', 'precipitation (mm)', 'rain (mm)', 'snowfall (cm)', 'cloudcover (%)', 'month', 'dayofweek', 'hour', 'time']
 
 
 

@@ -6,6 +6,7 @@ from django.core.management.base import BaseCommand
 from nybusy.models import WeatherData, PredictZone, TaxiZone
 from pycaret.regression import load_model
 
+
 # Configure logging
 logging.basicConfig(filename=r'zone_prediction.log', level=logging.INFO, format='%(asctime)s - %(message)s')
 
@@ -16,22 +17,9 @@ class Command(BaseCommand):
     def get_features(self, zones):
         logging.info("Fetching features...")
         # get data from database
-        data = WeatherData.objects.all().values('time', 'temperature', 'humidity', 'dewpoint', 'apparent_temperature',
-                                                'precipitation_probability', 'rain', 'snowfall', 'cloudcover')
+        data = WeatherData.objects.all().values('time')
 
         df = pd.DataFrame.from_records(data)
-
-        # rename columns to match model training names
-        df = df.rename(columns={
-            'temperature': 'temperature_2m (°C)',
-            'humidity': 'relativehumidity_2m (%)',
-            'dewpoint': 'dewpoint_2m (°C)',
-            'apparent_temperature': 'apparent_temperature (°C)',
-            'precipitation_probability': 'precipitation (mm)',
-            'rain': 'rain (mm)',
-            'snowfall': 'snowfall (cm)',
-            'cloudcover': 'cloudcover (%)',
-        })
 
         # convert time column to datetime
         df['time'] = pd.to_datetime(df['time'])
@@ -49,11 +37,17 @@ class Command(BaseCommand):
                 row_data.append(zone)  # Add the DOLocationID to the feature data
                 x_features.append(row_data)
                 LocationID.append(zone)
-                times.append(row['time'])
+                times.append(row['time'])  # Append the time to the times list
 
         logging.info("Finished fetching features.")
 
-        return pd.DataFrame(x_features, columns=df.columns.tolist() + ['LocationID']), LocationID, times
+        # Create the new DataFrame
+        df_x_features = pd.DataFrame(x_features, columns=df.columns.tolist() + ['LocationID'])
+
+        # Reorder the columns
+        df_x_features = df_x_features[['LocationID', 'time', 'month', 'dayofweek', 'hour']]
+
+        return df_x_features, LocationID, times
 
     def handle(self, *args, **kwargs):
         while True:
@@ -66,7 +60,7 @@ class Command(BaseCommand):
             # Load the model
             logging.info("Loading the model...")
 
-            model = load_model(r'G:\Users\98692\Documents\GitHub\comp47360\NEW\COMP47360\Data\all_zones_model')
+            model = load_model(r'G:\Users\98692\Documents\GitHub\comp47360\NEW\COMP47360\Data\final_decision_tree_model')
 
             # Define zones
             taxi_zones = [4, 13, 50, 68, 137, 140, 158, 170, 211, 224, 233, 262, 12, 194, 128, 120, 103, 24, 41, 42, 43, 45, 48, 74, 75, 79, 87, 88, 90, 100, 107, 113, 114, 116, 125, 127, 141,
