@@ -84,6 +84,7 @@ class PredictZone(models.Model):
     location_id = models.ForeignKey(TaxiZone, on_delete=models.SET_NULL, null=True)
     time = models.DateTimeField(null=True)
     busylevel = models.FloatField(null=True)
+    time_index = models.IntegerField(null=True)
 
 
 
@@ -122,6 +123,7 @@ class PredictPOI(models.Model):
     poi = models.ForeignKey(POI, on_delete=models.SET_NULL, null=True)
     time = models.DateTimeField(null=True)
     busylevel = models.FloatField(null=True)
+    time_index = models.IntegerField(null=True)
 
 
 class UserBucketlist(models.Model):

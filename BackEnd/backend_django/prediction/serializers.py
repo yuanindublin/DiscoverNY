@@ -7,7 +7,7 @@ class PredictZoneSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = PredictZone
-        fields = ['time', 'busylevel','busyindex']
+        fields = ['time', 'time_index', 'busylevel','busyindex']
 
     def get_busyindex(self, obj):
         taxi_zone = obj.location_id
@@ -24,24 +24,25 @@ class PredictZoneSerializer(serializers.ModelSerializer):
             else:
                 return 'Very Busy'
 
+
 class TaxiZoneSerializer(serializers.ModelSerializer):
     geometry = serializers.SerializerMethodField()
     predictzone = serializers.SerializerMethodField()
 
     class Meta:
         model = TaxiZone
-        fields = ['some_id', 'shape_area', 'objectid', 'shape_leng', 'location_id', 'zone', 'borough', 'geometry','predictzone']
+        fields = ['location_id', 'zone', 'borough', 'geometry','predictzone']
 
     def get_geometry(self, obj):
-        # 先用原始的GeometryField处理geometry数据
+        # Firstly, process the geometry data with the original GeometryField
         geo_field = GeometryField()
         geometry_data = geo_field.to_representation(obj.geometry)
 
-        # 检查geometry_data是否是None
+        # Check if geometry_data is None
         if geometry_data is None:
             return None
 
-        # 然后根据需要修改geometry_data
+        # Then modify geometry_data according to need
         if geometry_data['type'] == 'MultiPolygon':
             geometry_data['coordinates'] = geometry_data['coordinates'][0]
 
@@ -50,17 +51,17 @@ class TaxiZoneSerializer(serializers.ModelSerializer):
     def get_predictzone(self, obj):
         predictzones = PredictZone.objects.filter(location_id=obj.location_id)
 
-        # 获取请求的时间查询参数
-        time_str = self.context['request'].query_params.get('time', None)
-        if time_str is not None:
-            from django.utils.dateparse import parse_datetime
-            time_obj = parse_datetime(time_str)
-            if time_obj is not None:
-                # 如果有时间查询参数，那么在查询 PredictZone 时使用这个参数
-                predictzones = predictzones.filter(time=time_obj)
+        # Get the time query parameter from the request
+        time_index_str = self.context['request'].query_params.get('time_index', None)
+        if time_index_str is not None:
+            time_index = int(time_index_str)
+            if time_index is not None:
+                # If a time query parameter is provided, use it to filter the PredictZone query
+                predictzones = predictzones.filter(time_index=time_index)
 
         if predictzones:
             serializer = PredictZoneSerializer(predictzones, many=True, context=self.context)
             return serializer.data
 
         return None
+
