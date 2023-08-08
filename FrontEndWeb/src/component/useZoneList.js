@@ -2,11 +2,11 @@
 
 // import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
-import fetchBreedList from "./fetchBreedList";
+import fetchZoneList from "./fetchZoneList";
 
 // const localCache = {};
 
-export default function useBreedList(animal) {
+export default function useZoneList(category) {
   //   const [breedList, setBreedList] = useState([]);
   //   const [status, setStatus] = useState("unloaded");
 
@@ -33,8 +33,8 @@ export default function useBreedList(animal) {
   //     }
   //   }, [animal]);
 
-  const results = useQuery(["breeds", animal], fetchBreedList);
+  const results = useQuery(["categories", category], fetchZoneList);
 
   //   return [breedList, status];
-  return [results?.data?.breeds ?? [], results.status];
+  return [results?.data?.categories ?? [], results.status];
 }
