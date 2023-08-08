@@ -384,3 +384,22 @@ form .pet {
   top: 10px;
   right: 10px;
 }
+
+/* weather style*/
+.hello {
+  display: flex;
+  /* margin-top: 25px; */
+}
+
+.hello .info {
+  font-size: 12px;
+  /* margin-right: 20px; */
+}
+
+.hello .numbers {
+  font-size: 12px;
+}
+
+.hello p {
+  margin: 0;
+}

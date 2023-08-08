@@ -12,6 +12,7 @@ import Register from "./screens/Register";
 import Itinerary from "./screens/Itinerary";
 import Home from "./screens/Home";
 import { Container, Nav, Navbar, Form, Button } from "react-bootstrap";
+import Weather from "./component/Weather";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -47,6 +48,9 @@ const App = () => {
                   <Nav.Link href="/Login">Sign up/in</Nav.Link>
                 </Nav>
                 <Form className="d-flex">
+                  {/* <div> */}
+                  <Weather />
+                  {/* </div> */}
                   <Form.Control
                     type="search"
                     placeholder="Search"
