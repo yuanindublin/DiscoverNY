@@ -50,9 +50,9 @@ export default function Map() {
   const resultsTaxi = useQuery(["search", requestTaxizones], fetchTaxizones);
   const taxizonesData = resultsTaxi?.data ? resultsTaxi.data : [];
   //fetch all pois data of selected time
-  const [requestAllPois, setRequesAllPois] = useState({
-    time: "1",
-  });
+  // const [requestAllPois, setRequesAllPois] = useState({
+  //   time: "1",
+  // });
   //const resultsAllPois = useQuery(["search", requestAllPois], fetchAllPois);
   //const AllPoisData = resultsAllPois?.data ? resultsAllPois.data : [];
 
