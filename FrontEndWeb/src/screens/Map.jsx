@@ -13,7 +13,7 @@ import {
 import { useQuery } from "@tanstack/react-query";
 import fetchSearch from "../api/fetchSearch";
 import fetchTaxizones from "../api/fetchTaxizones";
-import fetchAllPois from "../api/fetchAllPois";
+//import fetchAllPois from "../api/fetchAllPois";
 
 const categories = [
   "museum",
@@ -53,8 +53,8 @@ export default function Map() {
   const [requestAllPois, setRequesAllPois] = useState({
     time: "1",
   });
-  const resultsAllPois = useQuery(["search", requestAllPois], fetchAllPois);
-  const AllPoisData = resultsAllPois?.data ? resultsAllPois.data : [];
+  //const resultsAllPois = useQuery(["search", requestAllPois], fetchAllPois);
+  //const AllPoisData = resultsAllPois?.data ? resultsAllPois.data : [];
 
   //select the prediction time
   const [Timevalue, setTimeValue] = useState(1);
