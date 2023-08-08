@@ -4,7 +4,10 @@ const Results = ({ pois }) => {
   return (
     <div className="search">
       {!pois.length ? (
-        <h1>No POIs Found</h1>
+        // <h1>No POIs Found</h1>
+        <div className="loading-pane">
+          <h2 className="loader">🌀</h2>
+        </div>
       ) : (
         pois.map((poi) => (
           <Poi
@@ -17,6 +20,7 @@ const Results = ({ pois }) => {
             // location={`${poi.city},${poi.state}`}
             location={poi.addr_city}
             id={poi.id}
+            zone={poi.zone}
           />
         ))
       )}

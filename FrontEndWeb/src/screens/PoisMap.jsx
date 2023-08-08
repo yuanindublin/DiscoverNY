@@ -6,6 +6,16 @@ import {
   InfoWindow,
 } from "@react-google-maps/api";
 import axios from "axios";
+// info box
+// import {
+//   Flex,
+//   Box,
+//   HStack,
+//   Input,
+//   ButtonGroup,
+//   IconButton,
+//   Text,
+// } from "@chakra-ui/react";
 
 // map center
 const center = {
@@ -42,7 +52,26 @@ export default function PoisMap() {
     googleMapsApiKey: import.meta.env.VITE_MAP_API_KEY,
   });
 
-  return isLoaded ? (
+  if (!isLoaded) {
+    return <div>Map Error</div>;
+  }
+  return (
+    // <Flex
+    //   position="relative"
+    //   flexDirection="column"
+    //   alignItems="center"
+    //   bgPos="center"
+    //   bgSize="cover"
+    //   h="100vh"
+    //   w="100vw"
+    // >
+    //   <Box position="absolute" left={0} top={0} h="100%" w="100%"></Box>
+    //   <Box p={4} borderRadius="lg" m={4} minW="container.md">
+    //     <HStack spacing={4}>
+    //       <Input type="text" placeholder="Origin" />
+    //       <Input type="text" placeholder="Destination" />
+    //     </HStack>
+    //   </Box>
     <GoogleMap
       mapContainerStyle={{ width: "100%", height: "100vh" }}
       center={center}
@@ -69,7 +98,6 @@ export default function PoisMap() {
         </Marker>
       ))}
     </GoogleMap>
-  ) : (
-    <></>
+    // </Flex>
   );
 }
