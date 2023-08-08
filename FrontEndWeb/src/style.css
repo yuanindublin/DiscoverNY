@@ -386,20 +386,38 @@ form .pet {
 }
 
 /* weather style*/
-.hello {
+.weather {
   display: flex;
   /* margin-top: 25px; */
 }
 
-.hello .info {
+.weather .info {
   font-size: 12px;
   /* margin-right: 20px; */
 }
 
-.hello .numbers {
+.weather .numbers {
   font-size: 12px;
 }
 
-.hello p {
+.weather p {
   margin: 0;
 }
+
+/* .info {
+  width: 65%;
+} */
+
+/* .info h1 {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.info h2 {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+} */

@@ -25,7 +25,6 @@ const queryClient = new QueryClient({
 
 const App = () => {
   return (
-    // <ItineraryProvider>
     <BrowserRouter>
       <QueryClientProvider client={queryClient}>
         <ItineraryProvider>
@@ -41,24 +40,34 @@ const App = () => {
               <Navbar.Toggle aria-controls="navbarScroll" />
               <Navbar.Collapse id="navbarScroll">
                 <Nav className="mx-auto">
-                  <Nav.Link href="/">Home</Nav.Link>
-                  <Nav.Link href="/Discover">Discover</Nav.Link>
-                  <Nav.Link href="/Map">Map</Nav.Link>
-                  <Nav.Link href="/Itinerary">Itinerary</Nav.Link>
-                  <Nav.Link href="/Login">Sign up/in</Nav.Link>
+                  <Nav.Link>
+                    <Link to="/">Home</Link>
+                  </Nav.Link>
+                  <Nav.Link>
+                    <Link to="/Discover">Discover</Link>
+                  </Nav.Link>
+                  <Nav.Link>
+                    <Link to="/Map">Map</Link>
+                  </Nav.Link>
+                  <Nav.Link>
+                    <Link to="/Itinerary">Itinerary</Link>
+                  </Nav.Link>
+                  <Nav.Link>
+                    <Link to="/Login">Sign up/in</Link>
+                  </Nav.Link>
                 </Nav>
-                <Form className="d-flex">
-                  {/* <div> */}
-                  <Weather />
-                  {/* </div> */}
-                  <Form.Control
+                {/* <Form className="d-flex"> */}
+                {/* <div> */}
+                <Weather />
+                {/* </div> */}
+                {/* <Form.Control
                     type="search"
                     placeholder="Search"
                     className="me-2"
                     aria-label="Search"
                   />
                   <Button variant="outline-success">Search</Button>
-                </Form>
+                </Form> */}
               </Navbar.Collapse>
             </Container>
           </Navbar>
@@ -75,7 +84,6 @@ const App = () => {
         </ItineraryProvider>
       </QueryClientProvider>
     </BrowserRouter>
-    // </ItineraryProvider>
   );
 };
 

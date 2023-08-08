@@ -99,26 +99,32 @@ export default function Weather() {
     //     <p>Loading...</p>
     //   )}
     // </div>
-    <div className="hello">
+    <div className="weather">
       {weather.length > 0 ? (
         <>
-          <Button variant="primary">
-            Temp: <Badge bg="secondary">{latestTemperature + "˚C"}</Badge>
-            <span className="visually-hidden">{latestTemperature + "˚C"}</span>
-          </Button>
-          {/* <disv> */}
-          <div className="info">
-            <p>Humidity: </p>
-            <p id="number">{latestHumidity + "%"}</p>
-          </div>
-          <div className="info" style={{ whiteSpace: "nowrap" }}>
-            <p>Rain risk: </p>
-            <p id="number">{latestprecipitation_probability + "%"}</p>
-          </div>
-          <div className="info" style={{ whiteSpace: "nowrap" }}>
-            <p>Weather: </p>
-            <p id="number">{getWeatherDescription(latestweathercode)}</p>
-          </div>
+          <p>
+            Temp: <br />
+            {latestTemperature + "˚C"}
+          </p>
+          {/* </div> */}
+          {/* <div className="info"> */}
+          <p>
+            Humidity: <br />
+            {latestHumidity + "%"}
+          </p>
+          {/* </div> */}
+          {/* <div className="info" style={{ whiteSpace: "nowrap" }}> */}
+          <p>
+            Rain risk: <br />
+            {latestprecipitation_probability + "%"}
+          </p>
+          {/* </div> */}
+          {/* <div className="info" style={{ whiteSpace: "nowrap" }}> */}
+          <p>
+            Weather: <br />
+            {getWeatherDescription(latestweathercode)}
+          </p>
+          {/* </div> */}
         </>
       ) : (
         <p>Loading...</p>
