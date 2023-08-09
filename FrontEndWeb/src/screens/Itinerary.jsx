@@ -1,5 +1,5 @@
 // import React, { useState, useEffect, useContext } from "react";
-import React from "react";
+import React, { useState, useEffect } from "react";
 // import AddedPoiContext from "../AddedPoiContext";
 import useItineray from "../context/itineraryContext";
 import PoiInCart from "../component/PoiInCart";
@@ -17,16 +17,19 @@ const formatTime = (time) => {
   const AmPm = time == 24 || time < 12 ? "AM" : "PM";
   return ` ${hours} ${AmPm}`;
 };
+
 export default function Itinerary() {
   // const [addedPois] = useContext(AddedPoiContext);
   const { products, total } = useItineray();
 
-  // const [Timevalue, setTimeValue] = useState(1);
-  // const handleChange = (event) => {
-  //   // setTimeValue(event.target.value);
-  //   // setRequesTaxizones({ time: event.target.value });
-  //   // setRequesAllPois({ time: event.target.value });
-  // };
+  const [Timevalue, setTimeValue] = useState(1);
+  const handleChange = (event) => {
+    console.log(event.target.value);
+    setTimeValue(event.target.value);
+    // setRequesTaxizones({ time: event.target.value });
+    // setRequesAllPois({ time: event.target.value });
+  };
+
   return (
     <div
       style={{
@@ -40,46 +43,18 @@ export default function Itinerary() {
           // padding: "15px",
         }}
       >
-        {/* <FullWidthContainer fluid> */}
-        {/* <div
-          style={{
-            width: "60%",
-          }}
-        >
-          Forecast Time:{" "}
-          <label htmlFor="hours">
-  hours
-  <select id="number" value={number}>
-    <option value="">Select an option</option>
-    {Numbers.map((number) => (
-      <option key={number} value={number}>
-        {number}
-      </option>
-    ))}
-  </select>
-</label>
-
-        </div> */}
-        {/* <Row>
-            <Col sm={4}>
-              <p style={{ marginTop: "20px", marginLeft: "20px" }}>
-                <Form.Label>Forecast Time: </Form.Label>
-                {formatTime(Timevalue)}
-              </p>
-              <Form.Range
-                min={1}
-                max={24}
-                step={1}
-                value={Timevalue}
-                onChange={handleChange}
-                bsPrefix="custom-range" // Custom CSS class name prefix
-              />
-            </Col>
-          </Row> */}
-        {/* </FullWidthContainer> */}
-
-        <Form.Label>Range</Form.Label>
-        <Form.Range />
+        <p>
+          <Form.Label>Forecast Time:</Form.Label>
+          {formatTime(Timevalue)}
+        </p>
+        <Form.Range
+          min={1}
+          max={24}
+          step={1}
+          value={Timevalue}
+          onChange={handleChange}
+          bsPrefix="custom-range" // Custom CSS class name prefix
+        />
       </div>
       <div className="search-mid">
         {/* <div> */}

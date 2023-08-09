@@ -11,9 +11,10 @@ import {
   Col,
 } from "react-bootstrap";
 import { useQuery } from "@tanstack/react-query";
-import fetchSearch from "../apis/fetchSearch";
-import fetchTaxizones from "../apis/fetchTaxizones";
+// import fetchSearch from "../apis/fetchSearch";
+// import fetchTaxizones from "../apis/fetchTaxizones";
 // import fetchAllPois from "../api/fetchAllPois";
+import axios from "axios";
 
 const categories = [
   "museum",
@@ -36,12 +37,48 @@ export default function Map() {
     // console.log("selected Category: ", eventKey);
   };
 
+  //fetch POIs data
+  async function fetchSearch({ queryKey }) {
+    const { category } = queryKey[1];
+    try {
+      const response = await axios.get(`http://127.0.0.1:8000/api/POIs/tag/`);
+      const categoryURL = response.data[category];
+      const res = await axios.get(categoryURL);
+      if (!res || !res.data) {
+        throw new Error(`poi search not successful for category: ${category}`);
+      }
+
+      // return res.json();
+      return res.data;
+    } catch (error) {
+      throw new Error(`Error fetching data: ${error.message}`);
+    }
+  }
+
   //fetch markers data of selected category
   const [requestParams, setRequesParams] = useState({
     category: "entertainment",
   });
   const results = useQuery(["search", requestParams], fetchSearch);
   const pois = results?.data ? results.data : [];
+
+  //fetch taxizones data
+  async function fetchTaxizones({ queryKey }) {
+    const { time } = queryKey[1];
+    try {
+      const apiRes = await axios.get(
+        `http://127.0.0.1:8000/api/taxizones/?time_index=${time}`
+      );
+      if (!apiRes || !apiRes.data) {
+        console.log("Fetch taxizones Error");
+        throw new Error(`Fetch taxizones prediction not ok`);
+      }
+      console.log("Fetch taxizones prediction OK");
+      return apiRes.data;
+    } catch (error) {
+      throw new Error(`Error fetching data: ${error.message}`);
+    }
+  }
 
   //fetch taxizones data of selected time
   const [requestTaxizones, setRequesTaxizones] = useState({
