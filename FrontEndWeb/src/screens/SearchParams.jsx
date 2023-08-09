@@ -7,23 +7,8 @@ import { useQuery } from "@tanstack/react-query";
 // import fetchSearch from "../apis/fetchSearch";
 // import Poi from "./Poi";
 import Results from "../component/Results";
-import axios from "axios";
-async function fetchSearch({ queryKey }) {
-  const { category } = queryKey[1];
-  try {
-    const response = await axios.get(`http://127.0.0.1:8000/api/POIs/tag/`);
-    const categoryURL = response.data[category];
-    const res = await axios.get(categoryURL);
-    if (!res || !res.data) {
-      throw new Error(`poi search not successful for category: ${category}`);
-    }
-
-    // return res.json();
-    return res.data;
-  } catch (error) {
-    throw new Error(`Error fetching data: ${error.message}`);
-  }
-}
+// import axios from "axios";
+import fetch from "isomorphic-fetch";
 
 const INTERESTS = ["POIs", "Events", "Restaurants", "Hotels"];
 const categories = [
@@ -38,6 +23,26 @@ const categories = [
   "library",
 ];
 // const zones = [];
+async function fetchSearch({ queryKey }) {
+  const { category } = queryKey[1];
+  try {
+    const response = await fetch(`http://127.0.0.1:8000/api/POIs/tag/`);
+    if (!response.ok) {
+      throw new Error(`Fetching category URL not successful`);
+    }
+    const categoryData = await response.json();
+    const categoryURL = categoryData[category];
+    const res = await fetch(categoryURL);
+    if (!res.ok) {
+      throw new Error(`poi search not successful for category: ${category}`);
+    }
+
+    // return res.json();
+    return res.json();
+  } catch (error) {
+    throw new Error(`Error fetching data: ${error.message}`);
+  }
+}
 
 const SearchPramas = () => {
   const [requestParams, setRequesParams] = useState({
@@ -53,6 +58,7 @@ const SearchPramas = () => {
   // useEffect(() => {
   //   setRequesParams("attraction");
   // }, []);
+
   return (
     <div className="search-params">
       {/* <h2>{counter}</h2> */}

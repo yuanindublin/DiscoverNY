@@ -6,7 +6,26 @@ import useItineray from "../context/itineraryContext";
 import Carousel from "./Carousel";
 import ErrorBoundary from "./ErrorBoundary";
 import Modal from "./Modal";
-import axios from "axios";
+import fetch from "isomorphic-fetch";
+
+const fetchPoi = async ({ queryKey }) => {
+  const id = queryKey[1];
+
+  // const apiRes = await fetch(`http://pets-v2.dev-apis.com/pets?id=${id}`);
+  const apiRes = await fetch(`http://127.0.0.1:8000/api/POIs/${id}/`);
+  if (!apiRes.ok) {
+    console.log("Fetch POI id Error");
+    throw new Error(`details/${id} fetch not ok`);
+  }
+  console.log("Fetch POI id OK");
+
+  // The response from fetch is not directly accessible with ".data" property
+  // You can parse the response and log it if needed
+  const responseData = await apiRes.json();
+  console.log(responseData);
+
+  return responseData;
+};
 
 const Details = () => {
   const [showModal, setShowModal] = useState(false);
@@ -25,24 +44,17 @@ const Details = () => {
   }, [products, name]);
 
   //fetch pois data
-  const fetchPoi = async ({ queryKey }) => {
-    const id = queryKey[1];
+  // const fetchPoi = async ({ queryKey }) => {
+  //   const id = queryKey[1];const apiRes = await axios.get(`http://127.0.0.1:8000/api/POIs/${id}/`);
+  //   if (!apiRes.ok) {
+  //     console.log("Fetch POI id Error");
+  //     throw new Error(`details/${id} fetch not ok`);
+  //   }
+  //   console.log("Fetch POI id OK");const responseData = await apiRes.json();
+  //   console.log(responseData);
 
-    // const apiRes = await fetch(`http://pets-v2.dev-apis.com/pets?id=${id}`);
-    const apiRes = await axios.get(`http://127.0.0.1:8000/api/POIs/${id}/`);
-    if (!apiRes.ok) {
-      console.log("Fetch POI id Error");
-      throw new Error(`details/${id} fetch not ok`);
-    }
-    console.log("Fetch POI id OK");
-
-    // The response from fetch is not directly accessible with ".data" property
-    // You can parse the response and log it if needed
-    const responseData = await apiRes.json();
-    console.log(responseData);
-
-    return responseData;
-  };
+  //   return responseData;
+  // };
 
   const handleClick = () => {
     const product = {

@@ -14,7 +14,7 @@ import { useQuery } from "@tanstack/react-query";
 // import fetchSearch from "../apis/fetchSearch";
 // import fetchTaxizones from "../apis/fetchTaxizones";
 // import fetchAllPois from "../api/fetchAllPois";
-import axios from "axios";
+import fetch from "isomorphic-fetch";
 
 const categories = [
   "museum",
@@ -27,43 +27,40 @@ const categories = [
   "gallery",
   "library",
 ];
-
-//fetch POIs data
 async function fetchSearch({ queryKey }) {
   const { category } = queryKey[1];
   try {
-    const response = await axios.get(`http://127.0.0.1:8000/api/POIs/tag/`);
-    const categoryURL = response.data[category];
-    const res = await axios.get(categoryURL);
-    if (!res || !res.data) {
+    const response = await fetch(`http://127.0.0.1:8000/api/POIs/tag/`);
+    if (!response.ok) {
+      throw new Error(`Fetching category URL not successful`);
+    }
+    const categoryData = await response.json();
+    const categoryURL = categoryData[category];
+    const res = await fetch(categoryURL);
+    if (!res.ok) {
       throw new Error(`poi search not successful for category: ${category}`);
     }
-
-    // return res.json();
-    return res.data;
+    return res.json();
   } catch (error) {
     throw new Error(`Error fetching data: ${error.message}`);
   }
 }
-
-//fetch taxizones data
 async function fetchTaxizones({ queryKey }) {
   const { time } = queryKey[1];
   try {
-    const apiRes = await axios.get(
+    const apiRes = await fetch(
       `http://127.0.0.1:8000/api/taxizones/?time_index=${time}`
     );
-    if (!apiRes || !apiRes.data) {
+    if (!apiRes.ok) {
       console.log("Fetch taxizones Error");
       throw new Error(`Fetch taxizones prediction not ok`);
     }
     console.log("Fetch taxizones prediction OK");
-    return apiRes.data;
+    return apiRes.json();
   } catch (error) {
     throw new Error(`Error fetching data: ${error.message}`);
   }
 }
-
 export default function Map() {
   //select the category
   const [selectedItem, setSelectedItem] = useState("Catetegory");
