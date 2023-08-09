@@ -16,4 +16,5 @@ async function fetchAllPois({ queryKey }) {
     throw new Error(`Error fetching data: ${error.message}`);
   }
 }
+
 export default fetchAllPois;

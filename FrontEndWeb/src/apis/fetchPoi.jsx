@@ -11,8 +11,13 @@ const fetchPoi = async ({ queryKey }) => {
     throw new Error(`details/${id} fetch not ok`);
   }
   console.log("Fetch POI id OK");
-  console.log(apiRes.data);
-  return apiRes.json();
+
+  // The response from fetch is not directly accessible with ".data" property
+  // You can parse the response and log it if needed
+  const responseData = await apiRes.json();
+  console.log(responseData);
+
+  return responseData;
 };
 
 export default fetchPoi;
