@@ -4,10 +4,26 @@ import { useState } from "react";
 // import { useEffect, useState } from "react";
 // import { useState, useEffect, useContext } from "react";
 import { useQuery } from "@tanstack/react-query";
-import fetchSearch from "../apis/fetchSearch";
+// import fetchSearch from "../apis/fetchSearch";
 // import Poi from "./Poi";
 import Results from "../component/Results";
-// import axios from "axios";
+import axios from "axios";
+async function fetchSearch({ queryKey }) {
+  const { category } = queryKey[1];
+  try {
+    const response = await axios.get(`http://127.0.0.1:8000/api/POIs/tag/`);
+    const categoryURL = response.data[category];
+    const res = await axios.get(categoryURL);
+    if (!res || !res.data) {
+      throw new Error(`poi search not successful for category: ${category}`);
+    }
+
+    // return res.json();
+    return res.data;
+  } catch (error) {
+    throw new Error(`Error fetching data: ${error.message}`);
+  }
+}
 
 const INTERESTS = ["POIs", "Events", "Restaurants", "Hotels"];
 const categories = [

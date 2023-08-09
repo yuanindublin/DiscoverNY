@@ -9,12 +9,38 @@ const busybadge = {
   Busy: "warning",
   "Very Busy": "danger",
 };
+
+//format time
+const formatTime = (time) => {
+  const hours = time === 24 ? 12 : time % 12 || 12;
+  const AmPm = time == 24 || time < 12 ? "AM" : "PM";
+  return ` ${hours} ${AmPm}`;
+};
+
 const PoiInCart = (props) => {
-  const { name, interests, category, images, location, id, zone } = props;
+  const {
+    name,
+    interests,
+    category,
+    images,
+    location,
+    id,
+    zone,
+    time,
+    predictions,
+  } = props;
 
   const imageUrl =
     // images.length > 0 ? images[0].image : "./assets/categories/empire.jpg";
     images.length > 0 ? images[0].image : empire;
+
+  //Select the predictions time
+  // const selectedTimePrediction = predictions.find(
+  //   (prediction) => new Date(prediction.time).getUTCHours() + 1 == time
+  // );
+  // const busyIndex = selectedTimePrediction
+  //   ? selectedTimePrediction.busyindex.toString()
+  //   : "N/A";
 
   return (
     // <a href={`/details/${id}`} className="pet">
@@ -28,13 +54,14 @@ const PoiInCart = (props) => {
         <h2>
           {interests} - {category} - {zone} - {location}
         </h2>
-        {/* {predictions} */}
-        {/* <Badge
-          bg={busybadge[predictions.busyindex]}
-          style={{ fontSize: "16px" }}
-        >
-          {predictions.busyindex}
+        Forecast:{formatTime(time)}
+        {/* <Badge bg={busybadge[busyIndex]} style={{ fontSize: "16px" }}>
+          {busyIndex}
         </Badge> */}
+        {/* <Badge
+          bg={busybadge[predictions.busyIndex]}
+          style={{ fontSize: "16px" }}
+        ></Badge> */}
       </div>
     </Link>
   );

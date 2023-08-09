@@ -11,6 +11,7 @@ import {
   Container,
   Row,
   Col,
+  Button,
 } from "react-bootstrap";
 const formatTime = (time) => {
   const hours = time === 24 ? 12 : time % 12 || 12;
@@ -36,26 +37,42 @@ export default function Itinerary() {
         position: "relative",
       }}
     >
-      <div
+      <Container
         style={{
           width: "60%",
           margin: "20px auto",
           // padding: "15px",
         }}
       >
-        <p>
-          <Form.Label>Forecast Time:</Form.Label>
-          {formatTime(Timevalue)}
-        </p>
-        <Form.Range
-          min={1}
-          max={24}
-          step={1}
-          value={Timevalue}
-          onChange={handleChange}
-          bsPrefix="custom-range" // Custom CSS class name prefix
-        />
-      </div>
+        <Row>
+          <Col>
+            <Form.Label>Forecast Time:</Form.Label>
+            {formatTime(Timevalue)}
+          </Col>
+          <Col>
+            <Button
+              variant="primary"
+              onClick={() => {
+                console.log("submitted");
+                // navigate(`/details/${id}`);
+              }}
+            >
+              Optimize route
+            </Button>
+          </Col>
+        </Row>
+
+        <Row>
+          <Form.Range
+            min={1}
+            max={24}
+            step={1}
+            value={Timevalue}
+            onChange={handleChange}
+            bsPrefix="custom-range" // Custom CSS class name prefix
+          />
+        </Row>
+      </Container>
       <div className="search-mid">
         {/* <div> */}
         {/* <div>Your cart total is {total}.00$</div> */}
@@ -75,6 +92,8 @@ export default function Itinerary() {
                 id={poi.id}
                 zone={poi.zone}
                 // predictions={poi.predictions[0]}
+                time={Timevalue}
+                predictions={poi.predictions}
               />
             </div>
           ))
