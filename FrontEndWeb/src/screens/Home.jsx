@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import HomeResults from "../component/HomeResults";
 import { useQuery } from "@tanstack/react-query";
-import fetchSearch from "../api/fetchSearch";
+import fetchSearch from "../apis/fetchSearch";
 import { Button, Form, Placeholder } from "react-bootstrap";
 
 const Home = () => {

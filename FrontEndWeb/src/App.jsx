@@ -30,15 +30,15 @@ const App = () => {
         <ItineraryProvider>
           <Navbar
             className="navbar"
-            style={{ backgroundColor: "#e3f2fd" }}
+            style={{ backdropFilter: "blur(5px)" }}
             // fixed="top"
           >
             <Container fluid>
               <Navbar.Brand expand="lg" href="#home">
                 Travel in Manhattan
               </Navbar.Brand>
-              <Navbar.Toggle aria-controls="navbarScroll" />
-              <Navbar.Collapse id="navbarScroll">
+              <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+              <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="mx-auto">
                   <Nav.Link>
                     <Link to="/">Home</Link>

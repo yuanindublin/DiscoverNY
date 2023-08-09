@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import useItineray from "../context/itineraryContext";
-import fetchPoi from "../api/fetchPoi";
+import fetchPoi from "../apis/fetchPoi";
 import Carousel from "./Carousel";
 import ErrorBoundary from "./ErrorBoundary";
 import Modal from "./Modal";

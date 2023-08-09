@@ -4,7 +4,7 @@ import { useState } from "react";
 // import { useEffect, useState } from "react";
 // import { useState, useEffect, useContext } from "react";
 import { useQuery } from "@tanstack/react-query";
-import fetchSearch from "../api/fetchSearch";
+import fetchSearch from "../apis/fetchSearch";
 // import Poi from "./Poi";
 import Results from "../component/Results";
 // import axios from "axios";

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import fetchWeather from "../api/fetchweather";
+import fetchWeather from "../apis/fetchweather";
 import { Badge, Button } from "react-bootstrap";
 
 export default function Weather() {

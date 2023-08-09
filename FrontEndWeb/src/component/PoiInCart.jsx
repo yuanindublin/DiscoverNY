@@ -26,7 +26,7 @@ const PoiInCart = (props) => {
       <div className="info">
         <h1>{name}</h1>
         <h2>
-          {location} - {interests} - {category} - {zone}
+          {interests} - {category} - {zone} - {location}
         </h2>
         {/* {predictions} */}
         {/* <Badge
