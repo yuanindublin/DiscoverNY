@@ -3,7 +3,7 @@ from datetime import datetime
 import time as time_module
 import logging
 from django.core.management.base import BaseCommand
-from nybusy.models import WeatherData, PredictZone, TaxiZone
+from nybusy.models import WeatherData, PredictZone, TaxiZone,PredictPOI,POI
 from pycaret.regression import load_model
 
 # Configure logging
@@ -55,12 +55,12 @@ class Command(BaseCommand):
             # Delete all existing predictions in the database
             logging.info("Deleting existing predictions...")
             PredictZone.objects.all().delete()
+            PredictPOI.objects.all().delete() # Clear PredictPOI table too
 
             # Load the model
             logging.info("Loading the model...")
             model = load_model(r'G:\Users\98692\Documents\GitHub\comp47360\NEW\COMP47360\Data\final_decision_tree_model')
 
-            # Define zones
             taxi_zones = [4, 13, 50, 68, 137, 140, 158, 170, 211, 224, 233, 262, 12, 194, 128, 120, 103, 24, 41, 42, 43,
                           45, 48, 74, 75, 79, 87, 88, 90, 100, 107, 113, 114, 116, 125, 127, 141,
                           142, 143, 144, 148, 151, 152, 153, 161, 162, 163, 164, 166, 186, 202, 209, 229, 230,
@@ -92,13 +92,24 @@ class Command(BaseCommand):
                 else:
                     busy_index = 'very busy'
 
-                prediction_data = PredictZone()  # Create a new instance in each loop
+                prediction_data = PredictZone()
                 prediction_data.time = time
-                prediction_data.time_index = time.hour + 1  # Extract the hour from the datetime and add 1
+                prediction_data.time_index = time.hour + 1
                 prediction_data.busylevel = i
-                prediction_data.location_id = zone_data  # Get the TaxiZone instance with the given location_id
+                prediction_data.location_id = zone_data
                 prediction_data.busyindex = busy_index
                 prediction_data.save()
+
+                # Save to PredictPOI for all associated POIs
+                associated_pois = POI.objects.filter(location_id=zone_data)
+                for poi in associated_pois:
+                    predict_poi = PredictPOI()
+                    predict_poi.poi = poi
+                    predict_poi.time = time
+                    predict_poi.busylevel = i
+                    predict_poi.time_index = time.hour + 1
+                    predict_poi.busyindex = busy_index
+                    predict_poi.save()
 
             logging.info("Prediction cycle completed.")
 

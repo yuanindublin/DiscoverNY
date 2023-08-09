@@ -3,26 +3,12 @@ from nybusy.models import PredictZone, TaxiZone
 from rest_framework_gis.fields import GeometryField
 
 class PredictZoneSerializer(serializers.ModelSerializer):
-    busyindex = serializers.SerializerMethodField()
 
     class Meta:
         model = PredictZone
         fields = ['time', 'time_index', 'busylevel','busyindex']
 
-    def get_busyindex(self, obj):
-        taxi_zone = obj.location_id
 
-        if taxi_zone.twenty_five_percentile is None or taxi_zone.fifty_percentile is None or taxi_zone.seventy_five_percentile is None:
-            return 'Data Unavailable'
-        else:
-            if obj.busylevel < taxi_zone.twenty_five_percentile:
-                return 'Not Busy'
-            elif obj.busylevel < taxi_zone.fifty_percentile:
-                return 'A little Busy'
-            elif obj.busylevel < taxi_zone.seventy_five_percentile:
-                return 'Busy'
-            else:
-                return 'Very Busy'
 
 
 class TaxiZoneSerializer(serializers.ModelSerializer):
