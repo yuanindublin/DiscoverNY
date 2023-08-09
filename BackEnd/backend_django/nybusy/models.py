@@ -85,7 +85,7 @@ class PredictZone(models.Model):
     time = models.DateTimeField(null=True)
     busylevel = models.FloatField(null=True)
     time_index = models.IntegerField(null=True)
-
+    busyindex = models.CharField(max_length=255, null=True, blank=True)
 
 
 class POI(models.Model):
@@ -124,6 +124,7 @@ class PredictPOI(models.Model):
     time = models.DateTimeField(null=True)
     busylevel = models.FloatField(null=True)
     time_index = models.IntegerField(null=True)
+    busyindex = models.CharField(max_length=255, null=True, blank=True)
 
 
 class UserBucketlist(models.Model):
