@@ -11,8 +11,8 @@ import {
   Col,
 } from "react-bootstrap";
 import { useQuery } from "@tanstack/react-query";
-import fetchSearch from "../api/fetchSearch";
-import fetchTaxizones from "../api/fetchTaxizones";
+import fetchSearch from "../apis/fetchSearch";
+import fetchTaxizones from "../apis/fetchTaxizones";
 // import fetchAllPois from "../api/fetchAllPois";
 
 const categories = [
@@ -61,7 +61,7 @@ export default function Map() {
   const handleChange = (event) => {
     setTimeValue(event.target.value);
     setRequesTaxizones({ time: event.target.value });
-    setRequesAllPois({ time: event.target.value });
+    // setRequesAllPois({ time: event.target.value });
   };
   const formatTime = (time) => {
     const hours = time === 24 ? 12 : time % 12 || 12;
