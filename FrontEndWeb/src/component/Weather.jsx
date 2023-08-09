@@ -1,9 +1,23 @@
 import React, { useState, useEffect } from "react";
-import fetchWeather from "../apis/fetchweather";
+// import fetchWeather from "../apis/fetchweather";
 import { Badge, Button } from "react-bootstrap";
+import axios from "axios";
 
 export default function Weather() {
   const [weather, setWeather] = useState([]); // Set initial value as an empty array
+  const fetchWeather = async () => {
+    try {
+      const apiRes = await axios.get(`http://127.0.0.1:8000/api/weatherdata/`);
+
+      if (!apiRes.ok) {
+        throw new Error(`weatherdata fetch not ok`);
+      }
+      console.log("weatherdata fetch ok");
+      return apiRes.json();
+    } catch (error) {
+      throw new Error(`Error fetching weather data: ${error.message}`);
+    }
+  };
 
   useEffect(() => {
     async function fetchWeatherData() {
