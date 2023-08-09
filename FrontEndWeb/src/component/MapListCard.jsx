@@ -18,7 +18,6 @@ const busybadge = {
   Busy: "warning",
   "Very Busy": "danger",
 };
-
 //format time
 const formatTime = (time) => {
   const hours = time === 24 ? 12 : time % 12 || 12;
@@ -75,11 +74,14 @@ const MapListCard = ({
 
   //Select the predictions time
   const selectedTimePrediction = predictions.find(
-    (prediction) => new Date(prediction.time).getUTCHours() + 1 == time
+    // const time =  new Date(prediction.time)
+    // const hour = time.getUTCHours() ;
+    (prediction) => new Date(prediction.time).getUTCHours() + 1 === time
   );
   const busyIndex = selectedTimePrediction
     ? selectedTimePrediction.busyindex.toString()
     : "N/A";
+  const badgeColor = busybadge[busyIndex] || "info"; // Default to info color if not found in busybadge
 
   return (
     <Card
@@ -114,7 +116,7 @@ const MapListCard = ({
           </AddMapButton>
         </Card.Title>
         Forecast:{formatTime(time)}
-        <Badge bg={busybadge[busyIndex]} style={{ fontSize: "16px" }}>
+        <Badge bg={badgeColor} style={{ fontSize: "16px" }}>
           {busyIndex}
         </Badge>
         <Card.Text>
@@ -168,8 +170,8 @@ const AddMapButton = styled.div`
   right: 30px;
   width: 30px;
   height: 30px;
-  // background: ${(props) => (props.isincart ? "#E55336" : "rgba(0,0,0,0)")};
-  background: ${(props) => (props.isincart ? "#E55336" : "#60c95d")};
+  // background: ${(props) => (props.isinCart ? "#E55336" : "rgba(0,0,0,0)")};
+  background: ${(props) => (props.isinCart ? "#E55336" : "#60c95d")};
   border-radius: 50%;
   padding: 5px;
   cursor: pointer;
