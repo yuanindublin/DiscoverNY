@@ -38,6 +38,8 @@ const Details = () => {
     } else {
       addToCart(product);
     }
+
+    console.log(`Added ${poi.name} to cart`);
     navigate("/Itinerary");
   };
   const { id } = useParams();
@@ -68,6 +70,7 @@ const Details = () => {
               <div>
                 <h1>Would you like to add {poi.name} into itinerary?</h1>
                 <div className="buttons">
+                  {/* <button> */}
                   <button onClick={handleClick} isincart={isincart}>
                     {/* <button onClick={handleClick}> */}
                     Yes

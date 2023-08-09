@@ -10,7 +10,7 @@ const PoiCard = ({ name, images, id, tags, location, zone }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const productIsInCart = products.find((product) => product.id === id);
+    const productIsInCart = products.find((product) => product.name === name);
 
     if (productIsInCart) {
       setIsInCart(true);
@@ -18,10 +18,11 @@ const PoiCard = ({ name, images, id, tags, location, zone }) => {
       setIsInCart(false);
     }
   }, [products, name]);
+  const product = { name, images, id, tags, location, zone };
 
   const handleClick = (e) => {
     // const product = { name, images, id, tags, addr_city, zone };
-    const product = { name, images, id, tags, location, zone };
+    // const product = { name, images, id, tags, location, zone };
     e.stopPropagation(); // Prevent the click event from bubbling up
 
     if (isincart) {
@@ -29,6 +30,7 @@ const PoiCard = ({ name, images, id, tags, location, zone }) => {
     } else {
       addToCart(product);
     }
+    console.log(`Added ${name} to cart`);
   };
 
   const imageUrl =
