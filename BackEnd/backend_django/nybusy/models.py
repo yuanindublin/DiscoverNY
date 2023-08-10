@@ -104,9 +104,7 @@ class POI(models.Model):
     zone = models.CharField(max_length=255)
     geometry = models.CharField(max_length=255)
     rating = models.FloatField(blank=True)
-
-
-    # liked_by = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='liked_pois')
+    liked_by = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='liked_pois')
 
     class Meta:
         ordering = ['addr_housenumber', 'addr_street', 'addr_city', 'addr_postcode', 'description', 'name',
