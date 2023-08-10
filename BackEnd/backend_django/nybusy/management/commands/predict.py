@@ -84,13 +84,13 @@ class Command(BaseCommand):
 
                 # Set the busyindex based on the thresholds
                 if i < zone_data.twenty_five_percentile:
-                    busy_index = 'not busy'
+                    busy_index = 'Not Busy'
                 elif zone_data.twenty_five_percentile <= i < zone_data.fifty_percentile:
-                    busy_index = 'a little busy'
+                    busy_index = 'A Little Busy'
                 elif zone_data.fifty_percentile <= i < zone_data.seventy_five_percentile:
-                    busy_index = 'busy'
+                    busy_index = 'Busy'
                 else:
-                    busy_index = 'very busy'
+                    busy_index = 'Very Busy'
 
                 prediction_data = PredictZone()
                 prediction_data.time = time
