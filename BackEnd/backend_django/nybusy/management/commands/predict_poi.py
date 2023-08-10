@@ -58,7 +58,7 @@ class Command(BaseCommand):
 
             # Load the model
             logging.info("Loading the model...")
-            model = load_model(r'G:\Users\98692\Documents\GitHub\comp47360\NEW\COMP47360\Data\final_decision_tree_model')
+            model = load_model(r'G:\Users\98692\Documents\GitHub\comp47360\NEW\COMP47360\busyness_POI_40_40.pickle')
 
             # Define zones
             taxi_zones = [4, 13, 50, 68, 137, 140, 158, 170, 211, 224, 233, 262, 12, 194, 128, 120, 103, 24, 41, 42, 43,
