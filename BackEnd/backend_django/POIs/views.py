@@ -8,6 +8,7 @@ from rest_framework.response import Response
 from nybusy.models import POI, UserBucketlist, POIImage, UserBucketlistItem
 from bucketlist.serializers import UserBucketlistSerializer
 from .serializers import POISerializer, POIImageSerializer
+from backend_django import settings
 
 class POIViewSet(viewsets.ModelViewSet):
     queryset = POI.objects.all()
@@ -35,7 +36,7 @@ class POIViewSet(viewsets.ModelViewSet):
     def tag(self, request, tag=None):
             if tag is None:
                 tags = POI.objects.values_list('tags', flat=True).distinct()
-                tag_urls = {tag: request.build_absolute_uri(reverse('poi-tag', args=[tag])) for tag in tags}
+                tag_urls = {tag: f"http://{settings.HOSTNAME}/api/POIs/tag/{tag}/" for tag in tags}
                 return JsonResponse(tag_urls)
             else:
                 pois = POI.objects.filter(tags__icontains=tag)

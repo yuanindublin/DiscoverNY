@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from nybusy.models import POI, POIImage, PredictPOI  # Make sure to import PredictPOI
+from nybusy.models import POI, POIImage, PredictPOI
+from backend_django import settings
 
 class PredictPOISerializer(serializers.ModelSerializer):
     class Meta:
@@ -7,9 +8,12 @@ class PredictPOISerializer(serializers.ModelSerializer):
         fields = ['time', 'busylevel', 'time_index', 'busyindex']
 
 class POIImageSerializer(serializers.ModelSerializer):
+    image = serializers.SerializerMethodField()
     class Meta:
         model = POIImage
         fields = ['id', 'image']
+    def get_image(self, obj):
+        return f"http://{settings.HOSTNAME}{obj.image.url}"
 
 class POISerializer(serializers.ModelSerializer):
     coordinate = serializers.SerializerMethodField()
