@@ -112,9 +112,8 @@ class POI(models.Model):
 
 
 class POIImage(models.Model):
-    image = models.ImageField(upload_to='images/', null=True, blank=True)
-    poi = models.ForeignKey(POI, related_name='images',
-                            on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='images/', default='images/default.jpg', null=True, blank=True)
+    poi = models.ForeignKey(POI, related_name='images', on_delete=models.CASCADE)
     imageID= models.IntegerField(null=True)
 
 class PredictPOI(models.Model):
@@ -137,3 +136,5 @@ class UserBucketlistItem(models.Model):
 
     class Meta:
         unique_together = ['user', 'poi']
+
+

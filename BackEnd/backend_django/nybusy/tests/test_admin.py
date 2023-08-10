@@ -1,48 +1,58 @@
-"""
-Test for the Django admin modifications
-"""
 import pytest
-from django.test import TestCase
 from django.contrib.auth import get_user_model
 from django.urls import reverse
-from django.test import Client
 
+@pytest.mark.django_db
+def test_user_list(client, django_user_model):
+    """Test that users are listed on page"""
+    admin_user = django_user_model.objects.create_superuser(
+        email='admin@example.com',
+        password='testpass123'
+    )
+    client.force_login(admin_user)
 
-class AdminSiteTests(TestCase):
-    """Test for Django admin."""
+    user = django_user_model.objects.create_user(
+        email='user@example.com',
+        password='testpass123',
+        name='Test User'
+    )
 
-    def setUp(self):
-        """Create user and client"""
-        self.client = Client()
-        self.admin_user = get_user_model().objects.create_superuser(
-            email='admin@example.com',
-            password='testpass123',
-        )
-        self.client.force_login(self.admin_user)
-        self.user = get_user_model().objects.create_user(
-            email='user@example.com',
-            password='testpass123',
-            name='Test User'
-        )
+    url = reverse('admin:nybusy_user_changelist')
+    res = client.get(url)
 
-    def test_user_list(self):
-        """Test that users are listed on page"""
-        url = reverse('admin:nybusy_user_changelist')
-        res = self.client.get(url)
+    assert user.name in str(res.content)
+    assert user.email in str(res.content)
 
-        self.assertContains(res, self.user.name)
-        self.assertContains(res, self.user.email)
+@pytest.mark.django_db
+def test_edit_user_page(client, django_user_model):
+    """Test the edit user page works"""
+    admin_user = django_user_model.objects.create_superuser(
+        email='admin@example.com',
+        password='testpass123'
+    )
+    client.force_login(admin_user)
 
-    def test_edit_user_page(self):
-        """Test the edit user page workd"""
-        url = reverse('admin:nybusy_user_change', args=[self.user.id])
-        res = self.client.get(url)
+    user = django_user_model.objects.create_user(
+        email='user@example.com',
+        password='testpass123',
+        name='Test User'
+    )
 
-        self.assertEqual(res.status_code, 200)
+    url = reverse('admin:nybusy_user_change', args=[user.id])
+    res = client.get(url)
 
-    def test_create_user_page(self):
-        """Test the create user page works"""
-        url = reverse('admin:nybusy_user_add')
-        res = self.client.get(url)
+    assert res.status_code == 200
 
-        self.assertEqual(res.status_code, 200)
+@pytest.mark.django_db
+def test_create_user_page(client, django_user_model):
+    """Test the create user page works"""
+    admin_user = django_user_model.objects.create_superuser(
+        email='admin@example.com',
+        password='testpass123'
+    )
+    client.force_login(admin_user)
+
+    url = reverse('admin:nybusy_user_add')
+    res = client.get(url)
+
+    assert res.status_code == 200

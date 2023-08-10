@@ -18,7 +18,7 @@ def test_wkt_loads(x):
     except:
         return False
 
-# Apply the test function to each row
+# Apply the tests function to each row
 df['valid_geometry'] = df['geometry'].apply(test_wkt_loads)
 
 # Print rows with invalid geometry

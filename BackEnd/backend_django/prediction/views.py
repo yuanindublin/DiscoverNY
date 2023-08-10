@@ -5,9 +5,11 @@ from nybusy.models import PredictZone, TaxiZone
 from rest_framework.response import Response
 from rest_framework import status
 from django.utils.dateparse import parse_datetime
+from rest_framework.permissions import AllowAny
 
 
 class TaxiZoneViewSet(viewsets.ModelViewSet):
+    permission_classes = [AllowAny]
     queryset = TaxiZone.objects.all()
     serializer_class = TaxiZoneSerializer
 
@@ -16,6 +18,7 @@ class TaxiZoneViewSet(viewsets.ModelViewSet):
 #     serializer_class = PredictZoneSerializer
 
 class PredictZoneViewSet(viewsets.ModelViewSet):
+    permission_classes = [AllowAny]
     serializer_class = PredictZoneSerializer
     queryset = PredictZone.objects.all()
 
