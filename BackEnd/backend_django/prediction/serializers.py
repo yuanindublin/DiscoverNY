@@ -11,7 +11,6 @@ class PredictZoneSerializer(serializers.ModelSerializer):
 
 
 
-
 class TaxiZoneSerializer(serializers.ModelSerializer):
     geometry = serializers.SerializerMethodField()
     predictzone = serializers.SerializerMethodField()
