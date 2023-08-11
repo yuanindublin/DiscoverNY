@@ -89,7 +89,12 @@ const POIScreen = () => {
     >
       <Image
         style={styles.image}
-        source={require("../assets/categories/empire.jpg")}
+        source={
+          getImageSource
+          // item.images && item.images.length > 0
+          //   ? { uri: item.images[0].image } // If images are available, use the first image URL
+          //   : require("../assets/categories/empire.jpg") // If no images, use the default image
+        }
         resize="contain" //Warning: Failed prop type: Invalid prop `resizeMethod` of value `contain` supplied to `Image`, expected one of ["auto","resize","scale"].
       />
       <View style={{ flex: 1, marginLeft: 10 }}>

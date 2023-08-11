@@ -187,12 +187,16 @@ const HeatMapScreen = () => {
           points={pois.map((poi) => ({
             latitude: poi.coordinate.latitude,
             longitude: poi.coordinate.longitude,
-            weight: poi.id, //need to be update to busyness index
+            weight: poi.predictions[0].busylevel, //need to be update to busyness index
           }))}
           radius={50}
           gradient={{
-            colors: ["green", "orange", "yellow", "red", "white"],
-            startPoints: [0.01, 0.04, 0.1, 0.45, 0.5],
+            // colors: ["green", "orange", "yellow", "red", "white"],
+            // startPoints: [0.01, 0.04, 0.1, 0.2, 0.5],
+            colors: ["green", "orange", "yellow", "red"],
+            startPoints: [0.01, 0.04, 0.05, 0.1],
+            // colors: ["orange", "red"],
+            // startPoints: [0.04, 0.1],
             colorMapSize: 100,
           }}
         ></Heatmap>

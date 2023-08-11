@@ -62,32 +62,32 @@ const Discover = () => {
         }}
       >
         {/* <TouchableOpacity onPress={() => navigation.openDrawer()}> */}
-        <TouchableOpacity onPress={() => navigation.navigate("POIScreen")}>
+        {/* <TouchableOpacity onPress={() => navigation.navigate("POIScreen")}> */}
         {/* <TouchableOpacity> */}
-          <View
-            style={{
-              width: 40,
-              height: 40,
-              backgroundColor: "white",
-              // borderRadius: 20,
-              alignItems: "center",
-              justifyContent: "center",
-              // shadowColor: "#000",
-              // shadowOffset: { width: 0, height: 2 },
-              // shadowOpacity: 0.8,
-              // shadowRadius: 2,
-              // elevation: 5,
-            }}
-          >
-            <Image
-              source={require("../assets/icons/menu.png")}
-              style={{ width: "100%", height: "100%" }}
-            />
-          </View>
-        </TouchableOpacity>
+        <View
+          style={{
+            width: 40,
+            height: 40,
+            backgroundColor: "white",
+            // borderRadius: 20,
+            alignItems: "center",
+            justifyContent: "center",
+            // shadowColor: "#000",
+            // shadowOffset: { width: 0, height: 2 },
+            // shadowOpacity: 0.8,
+            // shadowRadius: 2,
+            // elevation: 5,
+          }}
+        >
+          <Image
+            source={require("../assets/icons/menu.png")}
+            style={{ width: "100%", height: "100%" }}
+          />
+        </View>
+        {/* </TouchableOpacity> */}
         <View>
           <Text style={{ fontSize: 40, color: "#0B646B", fontWeight: "bold" }}>
-            Discover
+            Travel in
           </Text>
           <Text style={{ color: "#527283", fontSize: 36 }}>Manhattan</Text>
         </View>
@@ -171,7 +171,7 @@ const Discover = () => {
           >
             <MenuContainer
               key={"hotels"}
-              title="Hotels"
+              title="museum"
               imageSrc={Hotels}
               type={type}
               setType={setType}
@@ -179,7 +179,7 @@ const Discover = () => {
 
             <MenuContainer
               key={"attractions"}
-              title="Attractions"
+              title="attractions"
               imageSrc={Attractions}
               type={type}
               setType={setType}
@@ -187,7 +187,7 @@ const Discover = () => {
 
             <MenuContainer
               key={"restaurants"}
-              title="Restaurants"
+              title="shopping"
               imageSrc={Restaurants}
               type={type}
               setType={setType}
@@ -217,11 +217,19 @@ const Discover = () => {
                   marginLeft: 4,
                 }}
               >
-                <Text
-                  style={{ color: "#A0C4C7", fontSize: 20, fontWeight: "bold" }}
+                <TouchableOpacity
+                  onPress={() => navigation.navigate("POIScreen")}
                 >
-                  Explore
-                </Text>
+                  <Text
+                    style={{
+                      color: "#A0C4C7",
+                      fontSize: 20,
+                      fontWeight: "bold",
+                    }}
+                  >
+                    Explore
+                  </Text>
+                </TouchableOpacity>
                 <FontAwesome
                   name="long-arrow-right"
                   size={24}
