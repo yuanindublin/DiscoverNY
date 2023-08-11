@@ -41,13 +41,15 @@ const WelcomeScreen = () => {
   const navigate = useNavigation();
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView className="bg-white flex-1 relative">
       {/** First Section */}
-      <View style={styles.firstSection}>
-        <View style={styles.iconContainer}>
-          <Text style={styles.iconText}>Go</Text>
+      <View className="flex-row px-6 mt-4 items-center space-x-2">
+        <View className="w-16 h-16 bg-black rounded-full items-center justify-center">
+          <Text className="text-[#00BCC9] text-3xl font-semibold">Go</Text>
         </View>
-        <Text style={styles.sectionText}>Travel Manhattan</Text>
+        <Text className="text-[#2A2B4B] text-3xl font-semibold">
+          Travel in Manhattan
+        </Text>
       </View>
 
       {/* * Second Section
@@ -56,7 +58,7 @@ const WelcomeScreen = () => {
       </View> */}
 
       {/** Image Container */}
-      <View style={styles.imageContainer}>
+      <View className="flex-1 relative items-center justify-center">
         <Animatable.Image
           animation="fadeIn"
           easing="ease-in-out"
@@ -73,15 +75,15 @@ const WelcomeScreen = () => {
         <TouchableOpacity
           // onPress={() => navigation.navigate("Discover")}
           onPress={() => navigation.navigate("Login")}
-          style={styles.buttonContainer}
+          className="absolute bottom-100 w-24 h-24 border-l-2 border-r-2 border-t-4 border-[#00BCC9] rounded-full items-center justify-center"
         >
           <Animatable.View
             animation={"pulse"}
             easing="ease-in-out"
             iterationCount={"infinite"}
-            style={styles.button}
+            className="w-20 h-20 items-center justify-center rounded-full bg-[#00BCC9]"
           >
-            <Text style={styles.buttonText}>Go</Text>
+            <Text className="text-gray-50 text-[36px] font-semibold">Go</Text>
           </Animatable.View>
         </TouchableOpacity>
       </View>

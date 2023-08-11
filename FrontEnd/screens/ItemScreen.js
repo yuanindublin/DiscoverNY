@@ -5,6 +5,8 @@ import {
   ScrollView,
   Image,
   TouchableOpacity,
+  Button,
+  Linking,
 } from "react-native";
 import React, { useLayoutEffect, useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
@@ -19,9 +21,14 @@ import {
   incrementQuantity,
   removeFromCart,
 } from "../components/CartReducer";
+import Modal from "react-native-modal";
 
 const ItemScreen = ({ route }) => {
   const navigation = useNavigation();
+  const [isModalVisible, setModalVisible] = useState(false);
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible);
+  };
 
   const data = route?.params?.param;
   useLayoutEffect(() => {
@@ -99,9 +106,86 @@ const ItemScreen = ({ route }) => {
               <FontAwesome5 name="chevron-left" size={24} color="#06B2BE" />
             </TouchableOpacity>
 
-            <TouchableOpacity className="w-10 h-10 rounded-md items-center justify-center bg-[#06B2BE]">
+            <TouchableOpacity
+              onPress={toggleModal}
+              className="w-10 h-10 rounded-md items-center justify-center bg-[#06B2BE]"
+            >
               <FontAwesome5 name="heartbeat" size={24} color="#fff" />
             </TouchableOpacity>
+            <Modal isVisible={isModalVisible}>
+              <View
+                style={{
+                  flex: 1,
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <View
+                  style={{
+                    // flex: 1,
+                    width: 300,
+                    height: 250,
+                    borderRadius: 30,
+                    justifyContent: "center",
+                    alignItems: "center",
+                    backgroundColor: "#B2E3E5",
+                  }}
+                >
+                  <Text
+                    style={{
+                      color: "#428288",
+                      fontWeight: "bold",
+                      fontSize: 24,
+                    }}
+                  >
+                    Welcome to Travel in Manhattan!
+                  </Text>
+                  <Text
+                    style={{
+                      color: "#777",
+                      textAlign: "center",
+                      marginTop: 10,
+                      fontSize: 16,
+                    }}
+                  >
+                    To access the bucket list, please sign in on our website.
+                    {"\n"}
+                    <Text
+                      style={{
+                        color: "#428288",
+                        textDecorationLine: "underline",
+                        fontWeight: "bold",
+                        fontSize: 16,
+                      }}
+                      onPress={() =>
+                        Linking.openURL("http://csi6220-4-vm1.ucd.ie/")
+                      }
+                    >
+                      http://csi6220-4-vm1.ucd.ie/
+                    </Text>
+                    {"\n"}
+                    <Text
+                      style={{
+                        fontStyle: "italic",
+                        fontWeight: "bold",
+                        color: "#428288",
+                        marginTop: 10,
+                      }}
+                    >
+                      {"\n"}
+                      We can't wait for you to explore Manhattan's hidden gems!
+                    </Text>
+                  </Text>
+
+                  <Button
+                    title="Close"
+                    onPress={toggleModal}
+                    color="#428288"
+                    style={{ marginTop: 20 }}
+                  />
+                </View>
+              </View>
+            </Modal>
           </View>
         </View>
 
