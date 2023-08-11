@@ -3,10 +3,11 @@ from nybusy.models import PredictZone, TaxiZone
 from rest_framework_gis.fields import GeometryField
 
 class PredictZoneSerializer(serializers.ModelSerializer):
+    location_id = serializers.PrimaryKeyRelatedField(read_only=True)
 
     class Meta:
         model = PredictZone
-        fields = ['time', 'time_index', 'busylevel','busyindex']
+        fields = ['time', 'time_index', 'busylevel','busyindex','location_id']
 
 
 

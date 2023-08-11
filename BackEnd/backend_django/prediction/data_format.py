@@ -12,22 +12,22 @@ zones_with_subway = [24, 41, 42, 43, 45, 48, 74, 75, 79, 87, 88, 90, 100,
                      234, 236, 237, 238, 239, 243, 244, 246, 249, 261, 263]
 
 def get_features(zones):
-    # 获取数据库中的数据
+
     data = WeatherData.objects.all()
     df = read_frame(data)
 
-    # 转换时间格式并提取年，月，日，小时等特征
+
     df['time'] = pd.to_datetime(df['time'])
     df['month'] = df['time'].dt.month
     df['dayofweek'] = df['time'].dt.weekday
     df['hour'] = df['time'].dt.hour
 
-    # 初始化特征列表
+
     x_features = []
     DOLocations = []
     times = []
 
-    # 遍历每一行数据，将需要的特征提取出来
+
     for index, row in df.iterrows():
         temperature = row['temperature']
         humidity = row['humidity']
