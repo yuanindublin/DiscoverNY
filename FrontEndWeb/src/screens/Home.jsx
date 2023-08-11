@@ -15,8 +15,6 @@ async function fetchSearch({ queryKey }) {
     if (!res || !res.data) {
       throw new Error(`poi search not successful for category: ${category}`);
     }
-
-    // return res.json();
     return res.data;
   } catch (error) {
     throw new Error(`Error fetching data: ${error.message}`);
