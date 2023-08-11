@@ -111,8 +111,27 @@ const Details = () => {
       <div>
         <h1>{poi.name}</h1>
         <h2>
-          {`${poi.addr_city} - ${poi.tags} - ${poi.zone}`}
+          {" "}
+          ⛳️
+          {`${poi.addr_city} - ${poi.zone}${
+            poi.addr_street ? ` - ${poi.addr_street}` : ""
+          }`}
+          <br />
+          Open Time: {poi.opening_hours}
           <button onClick={() => setShowModal(true)}>Add {poi.name}</button>
+          <p>
+            {poi.website ? (
+              <>
+                {" "}
+                Website:{" "}
+                <a href={poi.website} target="_blank" rel="noopener noreferrer">
+                  {poi.website}
+                </a>
+              </>
+            ) : (
+              ""
+            )}
+          </p>
           <p>{poi.description}</p>
           {showModal ? (
             <Modal>
@@ -126,7 +145,7 @@ const Details = () => {
                     Close
                   </CloseButton>
                 </div>
-                <h1>Would you like to add {poi.name} into itinerary?</h1>
+                <h2>Would you like to add {poi.name} into itinerary?</h2>
                 <div className="buttons">
                   <button
                     onClick={handleClickItinerary}

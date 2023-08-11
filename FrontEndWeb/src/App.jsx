@@ -13,7 +13,7 @@ import Itinerary from "./screens/Itinerary";
 import Favorite from "./screens/Favorite";
 import Home from "./screens/Home";
 import Welcome from "./screens/Welcome";
-import { Container, Nav, Navbar, Form, Button } from "react-bootstrap";
+import { Container, Nav, Navbar } from "react-bootstrap";
 import Weather from "./component/Weather";
 
 const queryClient = new QueryClient({
@@ -31,6 +31,7 @@ const App = () => {
       <QueryClientProvider client={queryClient}>
         <UserProvider>
           <ItineraryProvider>
+            <Navbar />
             <Navbar
               className="navbar"
               style={{ backdropFilter: "blur(5px)" }}
@@ -38,6 +39,12 @@ const App = () => {
             >
               <Container fluid>
                 <Navbar.Brand expand="lg" href="/">
+                  <img
+                    src="./assets/icons/logo.jpeg"
+                    alt="Rain Risk"
+                    height="25px"
+                    width="25px"
+                  />
                   Travel in Manhattan
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -59,21 +66,10 @@ const App = () => {
                       <Link to="/Favorite">BucketList</Link>
                     </Nav.Link>
                     <Nav.Link>
-                      <Link to="/Login">Sign up/in</Link>
+                      <Link to="/Login">Sign Up</Link>
                     </Nav.Link>
                   </Nav>
-                  {/* <Form className="d-flex"> */}
-                  {/* <div> */}
                   <Weather />
-                  {/* </div> */}
-                  {/* <Form.Control
-                    type="search"
-                    placeholder="Search"
-                    className="me-2"
-                    aria-label="Search"
-                  />
-                  <Button variant="outline-success">Search</Button>
-                </Form> */}
                 </Navbar.Collapse>
               </Container>
             </Navbar>

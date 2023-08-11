@@ -3,8 +3,16 @@ import { Link } from "react-router-dom";
 import empire from "../assets/categories/empire.jpg";
 
 const Poi = (props) => {
-  const { name, interests, category, images, location, id, zone, predictions } =
-    props;
+  const {
+    name,
+    interests,
+    category,
+    images,
+    location,
+    id,
+    zone,
+    opening_hours,
+  } = props;
 
   const imageUrl =
     // images.length > 0 ? images[0].image : "./assets/categories/empire.jpg";
@@ -22,6 +30,7 @@ const Poi = (props) => {
         <h2>
           {location} - {interests} - {category} - {zone}
         </h2>
+        <h2>{opening_hours}</h2>
       </div>
     </Link>
   );

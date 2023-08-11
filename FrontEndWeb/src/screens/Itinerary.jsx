@@ -1,18 +1,9 @@
 // import React, { useState, useEffect, useContext } from "react";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 // import AddedPoiContext from "../AddedPoiContext";
 import useItineray from "../context/itineraryContext";
 import PoiInCart from "../component/PoiInCart";
-import { Accordion } from "react-bootstrap";
-import {
-  Dropdown,
-  DropdownButton,
-  Form,
-  Container,
-  Row,
-  Col,
-  Button,
-} from "react-bootstrap";
+import { Form, Container, Row, Col, Button, Spinner } from "react-bootstrap";
 
 // format the prediction time
 const formatTime = (time) => {
@@ -111,7 +102,11 @@ export default function Itinerary() {
         {/* <div> */}
         {/* <div>Your cart total is {total}.00$</div> */}
         {!products.length ? (
-          <h1>No POIs in itinerary now</h1>
+          <h4>
+            No POIs in itinerary now
+            <Spinner animation="grow" size="sm" />
+            <Spinner animation="grow" />
+          </h4>
         ) : (
           sortedProducts.map((poi) => (
             <div key={poi.id}>
