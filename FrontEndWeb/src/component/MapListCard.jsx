@@ -4,6 +4,8 @@ import styled from "styled-components";
 import useItinerary from "../context/itineraryContext";
 import empire from "../assets/categories/empire.jpg";
 import { Button, Card, Carousel, Image, Stack, Badge } from "react-bootstrap";
+import useUser from "../context/UserContext";
+import axios from "axios";
 
 // const busybadge = [
 //   { badge: "success", busy: "Not Busy" },
@@ -44,7 +46,9 @@ const MapListCard = ({
     refProp?.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   const { products, addToCart, removeFromCart } = useItinerary();
   const [isincart, setIsInCart] = useState(false);
+  const [isinbucket, setIsInBucket] = useState(false);
   const navigate = useNavigate();
+  const { userToken } = useUser();
 
   useEffect(() => {
     const productIsInCart = products.find((product) => product.name === name);
@@ -72,6 +76,28 @@ const MapListCard = ({
     } else {
       addToCart(product);
     }
+  };
+
+  const handleClickBucket = (e) => {
+    e.stopPropagation(); // Prevent the click event from bubbling up
+    axios
+      .post(
+        `http://127.0.0.1:8000/api/POIs/${id}/like/`,
+        {},
+        {
+          headers: {
+            Authorization: `Token ${userToken}`,
+          },
+        }
+      )
+      .then((response) => {
+        setIsInBucket(true);
+        console.log("userToken:", userToken);
+      })
+      .catch((error) => {
+        navigate("/Login");
+        console.log("userToken:", userToken);
+      });
   };
 
   //Select the predictions time
@@ -112,8 +138,12 @@ const MapListCard = ({
         <Card.Title>
           {name}
           <AddMapButton onClick={handleClick} isincart={isincart}>
-            <p>{isincart ? "❤️" : "♥"}</p>
+            <p>{isincart ? "-" : "+"}</p>
           </AddMapButton>
+
+          <BucketButton onClick={handleClickBucket} isinbucket={isinbucket}>
+            <p>{isinbucket ? "❤️" : "♥"}</p>
+          </BucketButton>
         </Card.Title>
         Forecast:{formatTime(time)}
         {selectedTimePrediction && ( // Check if selectedTimePrediction is defined
@@ -225,11 +255,11 @@ const BucketButton = styled.div`
   justify-content: center;
   align-items: center;
   top: 20px;
-  right: 30px;
+  left: 30px;
   width: 30px;
   height: 30px;
-  // background: ${(props) => (props.isInCart ? "#E55336" : "rgba(0,0,0,0)")};
-  background: ${(props) => (props.isInCart ? "#E55336" : "#60c95d")};
+  // background: ${(props) => (props.isinbucket ? "#E55336" : "rgba(0,0,0,0)")};
+  background: ${(props) => (props.isinbucket ? "#E55336" : "#60c95d")};
   border-radius: 50%;
   padding: 5px;
   cursor: pointer;

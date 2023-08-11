@@ -62,10 +62,10 @@ const PoiInCart = (props) => {
           {busyIndex}
         </Badge>
         {"    "}
-        BusyIndex:{" "}
+        {/* BusyIndex:{" "}
         <Badge bg={"info"} style={{ fontSize: "16px" }}>
           {busyLevel}
-        </Badge>
+        </Badge> */}
       </div>
     </Link>
   );
