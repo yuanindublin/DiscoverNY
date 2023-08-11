@@ -75,7 +75,17 @@ export default function Register() {
         height: "100vh",
       }}
     >
-      <div className="container">
+      <div
+        style={{
+          backgroundColor: "#e6f7f9",
+          border: "1px solid lightgrey",
+          borderRadius: "10px",
+          padding: "20px",
+          marginTop: "-100px",
+          marginLeft: "20%",
+          marginRight: "20%",
+        }}
+      >
         {/* Image */}
         <div style={{ textAlign: "center" }}>
           <img
@@ -115,23 +125,6 @@ export default function Register() {
             placeholder="Password"
             style={{ margin: "10px", marginLeft: "0px", width: "100%" }}
           />
-
-          {/* <div
-            style={{
-              textAlign: "left",
-              fontSize: "12px",
-            }}
-          >
-            <p>
-              Don't have an account?{" "}
-              <a href="#" onClick={handleSignUpClick}>
-                Sign up
-              </a>
-            </p>
-            <p>
-              Forgot password? <a href="#">Reset password</a>
-            </p>
-          </div> */}
 
           {/* Button */}
           <div

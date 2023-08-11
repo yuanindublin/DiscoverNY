@@ -391,12 +391,26 @@ form .pet {
 /* weather style*/
 .weather {
   display: flex;
+  justify-content: space-between;
   /* margin-top: 25px; */
+}
+
+.weather .block {
+  text-align: center;
+  border-radius: 10px;
+  /* background-color: lightblue; */
+  background-color: white;
+  padding: 10px;
+  display: inline-block;
+  margin: 0 5px;
 }
 
 .weather .info {
   font-size: 12px;
-  /* margin-right: 20px; */
+  border: 1px solid black;
+  border-radius: 10px;
+  background-color: white;
+  padding: 10px;
 }
 
 .weather .numbers {

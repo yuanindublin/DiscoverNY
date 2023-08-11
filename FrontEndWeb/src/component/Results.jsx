@@ -22,6 +22,7 @@ const Results = ({ pois }) => {
             id={poi.id}
             zone={poi.zone}
             predictions={poi.predictions}
+            opening_hours={poi.opening_hours}
           />
         ))
       )}

@@ -1,6 +1,6 @@
 // import React, { useState, useEffect, useContext } from "react";
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import useItineray from "../context/itineraryContext";
 import Poi from "../component/Poi";
@@ -18,6 +18,7 @@ import {
 import useUser from "../context/UserContext";
 import axios from "axios";
 import fetch from "isomorphic-fetch";
+import Spinner from "react-bootstrap/Spinner";
 
 const fetchPoi = async ({ queryKey }) => {
   const id = queryKey[1];
@@ -107,9 +108,16 @@ export default function Favorite() {
           <Modal.Header closeButton>
             <Modal.Title>🎯</Modal.Title>
           </Modal.Header>
-          <Modal.Body>Sign In to see the bucket list</Modal.Body>
+          <Modal.Body>
+            <div>
+              To access the bucket list, please <Link to="/login">sign in</Link>
+              . {/* Use Link for navigation */}
+              <br />
+              We can't wait for you to explore Manhattan's hidden gems!
+            </div>
+          </Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={() => setShowModal(false)}>
+            <Button variant="primary" onClick={() => setShowModal(false)}>
               Close
             </Button>
           </Modal.Footer>
@@ -128,7 +136,11 @@ export default function Favorite() {
         {/* <div> */}
         {/* <div>Your cart total is {total}.00$</div> */}
         {!bucketlistData.length ? (
-          <h4>No POIs in Bucket List now</h4>
+          <h4>
+            No POIs in Bucket List now
+            <Spinner animation="grow" size="sm" />
+            <Spinner animation="grow" />
+          </h4>
         ) : (
           bucketlistData.map((item) => (
             // <div key={poi.id}>

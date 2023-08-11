@@ -47,7 +47,17 @@ export default function Login() {
         height: "100vh",
       }}
     >
-      <div className="container">
+      <div
+        style={{
+          backgroundColor: "#e6f7f9",
+          border: "1px solid lightgrey",
+          borderRadius: "10px",
+          padding: "20px",
+          marginTop: "-100px",
+          marginLeft: "20%",
+          marginRight: "20%",
+        }}
+      >
         {/* Image */}
         <div style={{ textAlign: "center" }}>
           <img
