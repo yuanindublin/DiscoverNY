@@ -49,21 +49,21 @@ export default function MapLeaf({
     if (percentage <= 0.25) {
       colors = {
         "Not Busy": "#1f6924", // Green
-        "A little Busy": "#a1c349", // Light Yellow
+        "A Little Busy": "#a1c349", // Light Yellow
         Busy: "#f3c053", // Light Red
         "Very Busy": "#ec3f13", // Dark Red
       };
     } else if (percentage <= 0.5) {
       colors = {
         "Not Busy": "#6a8532", // Green
-        "A little Busy": "#94b33d", // Light Yellow
+        "A Little Busy": "#94b33d", // Light Yellow
         Busy: "#ffad33", // Light Red
         "Very Busy": "#a50104", // Dark Red
       };
     } else {
       colors = {
-        "Not Busy": "#1f6924", // Green
-        "A little Busy": "#6a8532", // Light Yellow
+        "Not Busy": "#2d6a4f", // Green
+        "A Little Busy": "#6a8532", // Light Yellow
         Busy: "#ff7e33", // Light Red
         "Very Busy": "#7a0103", // Dark Red
       };

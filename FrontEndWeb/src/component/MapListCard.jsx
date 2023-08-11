@@ -65,6 +65,7 @@ const MapListCard = ({
       tags: tags,
       addr_city: location,
       zone: zone,
+      predictions: predictions,
     };
     if (isincart) {
       removeFromCart(product);
@@ -75,7 +76,8 @@ const MapListCard = ({
 
   //Select the predictions time
   const selectedTimePrediction = predictions.find(
-    (prediction) => new Date(prediction.time).getUTCHours() + 1 == time
+    (prediction) =>
+      prediction.time && new Date(prediction.time).getUTCHours() + 1 == time
   );
   const busyIndex = selectedTimePrediction
     ? selectedTimePrediction.busyindex.toString()
@@ -114,9 +116,14 @@ const MapListCard = ({
           </AddMapButton>
         </Card.Title>
         Forecast:{formatTime(time)}
-        <Badge bg={busybadge[busyIndex]} style={{ fontSize: "16px" }}>
-          {busyIndex}
-        </Badge>
+        {selectedTimePrediction && ( // Check if selectedTimePrediction is defined
+          <>
+            {"  "}
+            <Badge bg={busybadge[busyIndex]} style={{ fontSize: "16px" }}>
+              {busyIndex}
+            </Badge>
+          </>
+        )}
         <Card.Text>
           <p className="no-padding-margin">
             Open Time: {opening_hours}
@@ -212,7 +219,7 @@ const Subtitle = styled.p`
   margin: 0px;
 `;
 
-const AddButton = styled.div`
+const BucketButton = styled.div`
   position: absolute;
   display: flex;
   justify-content: center;

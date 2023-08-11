@@ -7,6 +7,9 @@ import Carousel from "./Carousel";
 import ErrorBoundary from "./ErrorBoundary";
 import Modal from "./Modal";
 import fetch from "isomorphic-fetch";
+import axios from "axios";
+import { CloseButton } from "react-bootstrap";
+import useUser from "../context/UserContext";
 
 const fetchPoi = async ({ queryKey }) => {
   const id = queryKey[1];
@@ -32,6 +35,8 @@ const Details = () => {
   const navigate = useNavigate();
   const { products, addToCart, removeFromCart } = useItineray();
   const [isincart, setIsInCart] = useState(false);
+  const [error, setError] = useState("");
+  const { userToken } = useUser();
 
   useEffect(() => {
     const productIsInCart = products.find((product) => product.name === name);
@@ -43,20 +48,7 @@ const Details = () => {
     }
   }, [products, name]);
 
-  //fetch pois data
-  // const fetchPoi = async ({ queryKey }) => {
-  //   const id = queryKey[1];const apiRes = await axios.get(`http://127.0.0.1:8000/api/POIs/${id}/`);
-  //   if (!apiRes.ok) {
-  //     console.log("Fetch POI id Error");
-  //     throw new Error(`details/${id} fetch not ok`);
-  //   }
-  //   console.log("Fetch POI id OK");const responseData = await apiRes.json();
-  //   console.log(responseData);
-
-  //   return responseData;
-  // };
-
-  const handleClick = () => {
+  const handleClickItinerary = () => {
     const product = {
       name: poi.name,
       images: poi.images,
@@ -65,6 +57,7 @@ const Details = () => {
       tags: poi.tags,
       addr_city: poi.addr_city,
       zone: poi.zone,
+      predictions: poi.predictions,
     };
 
     if (isincart) {
@@ -87,6 +80,28 @@ const Details = () => {
     );
   }
 
+  const handleClickBucket = () => {
+    setError("");
+    axios
+      .post(
+        `http://127.0.0.1:8000/api/POIs/${poi.id}/like/`,
+        {},
+        {
+          headers: {
+            Authorization: `Token ${userToken}`,
+          },
+        }
+      )
+      .then((response) => {
+        // handle success
+        console.log("userToken:", userToken);
+      })
+      .catch((error) => {
+        navigate("/Login");
+        console.log("userToken:", userToken);
+      });
+  };
+
   // const poi = results.data.pois[0];
   const poi = results.data;
 
@@ -102,18 +117,31 @@ const Details = () => {
           {showModal ? (
             <Modal>
               <div>
+                <div className="d-flex justify-content-end">
+                  <CloseButton
+                    aria-label="Hide"
+                    onClick={() => setShowModal(false)}
+                    className="ml-auto"
+                  >
+                    Close
+                  </CloseButton>
+                </div>
                 <h1>Would you like to add {poi.name} into itinerary?</h1>
                 <div className="buttons">
-                  {/* <button> */}
-                  <button onClick={handleClick} isincart={isincart}>
-                    {/* <button onClick={handleClick}> */}
+                  <button
+                    onClick={handleClickItinerary}
+                    isincart={isincart.toString()}
+                  >
                     Yes
                   </button>
-                  <button onClick={() => setShowModal(false)}>Go Back</button>
+                  <button onClick={handleClickBucket}>
+                    Add into Bucketlist
+                  </button>
                 </div>
               </div>
             </Modal>
-          ) : null}
+          ) : // </CloseButton>
+          null}
         </h2>
       </div>
     </div>

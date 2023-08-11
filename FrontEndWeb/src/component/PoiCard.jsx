@@ -3,10 +3,15 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import useItinerary from "../context/itineraryContext";
 import empire from "../assets/categories/empire.jpg";
+import axios from "axios";
+import useUser from "../context/UserContext";
 
-const PoiCard = ({ name, images, id, tags, location, zone }) => {
+const PoiCard = ({ name, images, id, tags, location, zone, predictions }) => {
   const { products, addToCart, removeFromCart } = useItinerary();
   const [isincart, setIsInCart] = useState(false);
+  const [isinbucket, setIsInBucket] = useState(false);
+  const { userToken } = useUser();
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -18,11 +23,9 @@ const PoiCard = ({ name, images, id, tags, location, zone }) => {
       setIsInCart(false);
     }
   }, [products, name]);
-  const product = { name, images, id, tags, location, zone };
+  const product = { name, images, id, tags, location, zone, predictions };
 
   const handleClick = (e) => {
-    // const product = { name, images, id, tags, addr_city, zone };
-    // const product = { name, images, id, tags, location, zone };
     e.stopPropagation(); // Prevent the click event from bubbling up
 
     if (isincart) {
@@ -31,6 +34,28 @@ const PoiCard = ({ name, images, id, tags, location, zone }) => {
       addToCart(product);
     }
     console.log(`Added ${name} to cart`);
+  };
+
+  const handleClickBucket = (e) => {
+    e.stopPropagation(); // Prevent the click event from bubbling up
+    axios
+      .post(
+        `http://127.0.0.1:8000/api/POIs/${id}/like/`,
+        {},
+        {
+          headers: {
+            Authorization: `Token ${userToken}`,
+          },
+        }
+      )
+      .then((response) => {
+        setIsInBucket(true);
+        console.log("userToken:", userToken);
+      })
+      .catch((error) => {
+        navigate("/Login");
+        console.log("userToken:", userToken);
+      });
   };
 
   const imageUrl =
@@ -44,15 +69,17 @@ const PoiCard = ({ name, images, id, tags, location, zone }) => {
         navigate(`/details/${id}`);
       }}
     >
-      <AddButton onClick={handleClick} isincart={isincart}>
-        {/* <p>{isInCart ? "-" : "+"}</p> */}
-        <p>{isincart ? "❤️" : "♥"}</p>
-      </AddButton>
-      <TextContainer
-      // onClick={() => {
-      //   navigate(`/details/${id}`);
-      // }}
-      >
+      <ButtonsContainer>
+        <AddButton onClick={handleClick} isincart={isincart}>
+          <p>{isincart ? "-" : "+"}</p>
+          {/* <p>{isincart ? "❤️" : "♥"}</p> */}
+        </AddButton>
+        <BucketButton onClick={handleClickBucket} isinbucket={isinbucket}>
+          {/* <p>{isincart ? "-" : "+"}</p> */}
+          <p>{isinbucket ? "❤️" : "♥"}</p>
+        </BucketButton>
+      </ButtonsContainer>
+      <TextContainer>
         <Title>{name}</Title>
         <Subtitle>⛳️ {location}</Subtitle>
       </TextContainer>
@@ -104,6 +131,33 @@ const AddButton = styled.div`
   }
 `;
 
+const BucketButton = styled.div`
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 20px;
+  left: 30px;
+  width: 30px;
+  height: 30px;
+  // background: ${(props) => (props.isinbucket ? "#E55336" : "rgba(0,0,0,0)")};
+  background: ${(props) => (props.isinbucket ? "#E55336" : "#60c95d")};
+  border-radius: 50%;
+  padding: 5px;
+  cursor: pointer;
+
+  :hover {
+    transform: scale(1.2);
+    transition: 1s;
+  }
+
+  p {
+    font-size: 20px;
+    margin: 0;
+    color: white;
+  }
+`;
+
 const TextContainer = styled.div`
   display: grid;
   gap: 10px;
@@ -128,4 +182,10 @@ const Subtitle = styled.p`
   font-size: 15px;
   color: rgba(255, 255, 255, 0.7);
   margin: 0px;
+`;
+
+const ButtonsContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100px;
 `;
