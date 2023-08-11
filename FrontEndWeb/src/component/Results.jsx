@@ -21,6 +21,7 @@ const Results = ({ pois }) => {
             location={poi.addr_city}
             id={poi.id}
             zone={poi.zone}
+            predictions={poi.predictions}
           />
         ))
       )}

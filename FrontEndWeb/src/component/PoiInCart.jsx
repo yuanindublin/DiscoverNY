@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import empire from "../assets/categories/empire.jpg";
 import { Button, Card, Carousel, Image, Stack, Badge } from "react-bootstrap";
 
 const busybadge = {
   "Not Busy": "success",
-  "A little Busy": "warning",
+  "A Little Busy": "warning",
   Busy: "warning",
   "Very Busy": "danger",
 };
@@ -34,13 +34,16 @@ const PoiInCart = (props) => {
     // images.length > 0 ? images[0].image : "./assets/categories/empire.jpg";
     images.length > 0 ? images[0].image : empire;
 
-  //Select the predictions time
-  // const selectedTimePrediction = predictions.find(
-  //   (prediction) => new Date(prediction.time).getUTCHours() + 1 == time
-  // );
-  // const busyIndex = selectedTimePrediction
-  //   ? selectedTimePrediction.busyindex.toString()
-  //   : "N/A";
+  // Select the predictions time
+  const selectedTimePrediction = predictions.find(
+    (prediction) => new Date(prediction.time).getUTCHours() + 1 == time
+  );
+  const busyIndex = selectedTimePrediction
+    ? selectedTimePrediction.busyindex.toString()
+    : "N/A";
+  const busyLevel = selectedTimePrediction
+    ? selectedTimePrediction.busylevel.toString()
+    : "0";
 
   return (
     // <a href={`/details/${id}`} className="pet">
@@ -52,16 +55,17 @@ const PoiInCart = (props) => {
       <div className="info">
         <h1>{name}</h1>
         <h2>
-          {interests} - {category} - {zone} - {location}
+          {interests} - {category} - {zone} {location ? `- ${location}` : ""}
         </h2>
-        Forecast:{formatTime(time)}
-        {/* <Badge bg={busybadge[busyIndex]} style={{ fontSize: "16px" }}>
+        Forecast:{formatTime(time)}{" "}
+        <Badge bg={busybadge[busyIndex]} style={{ fontSize: "16px" }}>
           {busyIndex}
-        </Badge> */}
-        {/* <Badge
-          bg={busybadge[predictions.busyIndex]}
-          style={{ fontSize: "16px" }}
-        ></Badge> */}
+        </Badge>
+        {"    "}
+        BusyIndex:{" "}
+        <Badge bg={"info"} style={{ fontSize: "16px" }}>
+          {busyLevel}
+        </Badge>
       </div>
     </Link>
   );
