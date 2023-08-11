@@ -104,9 +104,7 @@ class POI(models.Model):
     zone = models.CharField(max_length=255)
     geometry = models.CharField(max_length=255)
     rating = models.FloatField(blank=True)
-
-
-    # liked_by = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='liked_pois')
+    liked_by = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='liked_pois')
 
     class Meta:
         ordering = ['addr_housenumber', 'addr_street', 'addr_city', 'addr_postcode', 'description', 'name',
@@ -114,9 +112,8 @@ class POI(models.Model):
 
 
 class POIImage(models.Model):
-    image = models.ImageField(upload_to='images/', null=True, blank=True)
-    poi = models.ForeignKey(POI, related_name='images',
-                            on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='images/', default='images/default.jpg', null=True, blank=True)
+    poi = models.ForeignKey(POI, related_name='images', on_delete=models.CASCADE)
     imageID= models.IntegerField(null=True)
 
 class PredictPOI(models.Model):
@@ -139,3 +136,5 @@ class UserBucketlistItem(models.Model):
 
     class Meta:
         unique_together = ['user', 'poi']
+
+

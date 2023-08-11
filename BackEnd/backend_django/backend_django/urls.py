@@ -37,7 +37,7 @@ urlpatterns = [
     path('api/user/', include('user.urls')),
     path('api/', include('weather.urls')),
 
-    path('test/', my_view),  # note here
+    path('tests/', my_view),  # note here
     path('api/', include('prediction.urls')),
 
 ]

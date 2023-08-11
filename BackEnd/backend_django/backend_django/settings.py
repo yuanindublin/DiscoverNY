@@ -27,8 +27,16 @@ SECRET_KEY = "django-insecure-!bq#6pw)b4+vo)ic4nciya38kwp6wt!%&#r58eyr63)(1a6hop
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+CORS_ALLOW_HEADERS = [
+    "x-requested-with",
+    "content-type",
+    "accept",
+    "origin",
+    "authorization",
+    "x-csrftoken",
+]
 HOSTNAME = '127.0.0.1:8000'
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'csi6220-4-vm1.ucd.ie']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'csi6220-4-vm1.ucd.ie','http://localhost:5173']
 
 
 # Application definition
@@ -56,10 +64,10 @@ INSTALLED_APPS = [
 CORS_ORIGIN_ALLOW_ALL = True
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
-    'corsheaders.middleware.CorsMiddleware',
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
@@ -149,6 +157,7 @@ AUTH_USER_MODEL = 'nybusy.User'
 
 REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+    'DEFAULT_AUTHENTICATION_CLASSES': ['rest_framework.authentication.TokenAuthentication',],
 }
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

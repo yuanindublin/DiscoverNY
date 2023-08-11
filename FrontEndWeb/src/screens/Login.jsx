@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import useUser from "../context/UserContext";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  // const { updateUserToken } = useContext(UserContext);
+  const { updateUserToken } = useUser();
 
   function handleLogin(email, password) {
     setError("");
@@ -18,8 +21,10 @@ export default function Login() {
       .then((res) => {
         let userInfo = res.data;
         localStorage.setItem("userInfo", JSON.stringify(userInfo));
+        updateUserToken(userInfo.token);
         console.log(userInfo);
-        navigate("/Map");
+        // navigate("/Favorite");
+        navigate("/Home");
       })
       .catch((error) => {
         setError("Invalid credentials. Please try again.");

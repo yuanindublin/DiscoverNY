@@ -1,25 +1,57 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import useUser from "../context/UserContext";
 
-export default function Login() {
+// const csrftoken = getCookie("csrftoken");
+export default function Register() {
   const [name, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const { updateUserToken } = useUser();
+
+  function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== "") {
+      const cookies = document.cookie.split(";");
+      for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim();
+
+        if (cookie.startsWith(name + "=")) {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
+        }
+      }
+    }
+    return cookieValue;
+  }
 
   function handleRegister(name, email, password) {
+    const csrftoken = getCookie("csrftoken");
+    console.log("csrftoken:", csrftoken);
     axios
-      .post(`http://127.0.0.1:8000/api/user/create/`, {
-        name,
-        email,
-        password,
-      })
+      .post(
+        `http://127.0.0.1:8000/api/user/create/`,
+        {
+          name,
+          email,
+          password,
+        },
+        {
+          headers: {
+            "X-CSRFToken": csrftoken,
+          },
+        }
+      )
       .then((res) => {
         let userInfo = res.data;
         localStorage.setItem("userInfo", JSON.stringify(userInfo));
+        // updateUserToken(userInfo.token);
+        updateUserToken(csrftoken);
         console.log(userInfo);
-        navigate("/Map");
+        console.log("csrftoken:", csrftoken);
+        navigate("/Home");
       })
       .catch((error) => {
         console.error("register  error", error);

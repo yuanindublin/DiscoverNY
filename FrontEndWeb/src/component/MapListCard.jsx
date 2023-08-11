@@ -4,6 +4,8 @@ import styled from "styled-components";
 import useItinerary from "../context/itineraryContext";
 import empire from "../assets/categories/empire.jpg";
 import { Button, Card, Carousel, Image, Stack, Badge } from "react-bootstrap";
+import useUser from "../context/UserContext";
+import axios from "axios";
 
 // const busybadge = [
 //   { badge: "success", busy: "Not Busy" },
@@ -44,7 +46,9 @@ const MapListCard = ({
     refProp?.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   const { products, addToCart, removeFromCart } = useItinerary();
   const [isincart, setIsInCart] = useState(false);
+  const [isinbucket, setIsInBucket] = useState(false);
   const navigate = useNavigate();
+  const { userToken } = useUser();
 
   useEffect(() => {
     const productIsInCart = products.find((product) => product.name === name);
@@ -65,6 +69,7 @@ const MapListCard = ({
       tags: tags,
       addr_city: location,
       zone: zone,
+      predictions: predictions,
     };
     if (isincart) {
       removeFromCart(product);
@@ -73,9 +78,32 @@ const MapListCard = ({
     }
   };
 
+  const handleClickBucket = (e) => {
+    e.stopPropagation(); // Prevent the click event from bubbling up
+    axios
+      .post(
+        `http://127.0.0.1:8000/api/POIs/${id}/like/`,
+        {},
+        {
+          headers: {
+            Authorization: `Token ${userToken}`,
+          },
+        }
+      )
+      .then((response) => {
+        setIsInBucket(true);
+        console.log("userToken:", userToken);
+      })
+      .catch((error) => {
+        navigate("/Login");
+        console.log("userToken:", userToken);
+      });
+  };
+
   //Select the predictions time
   const selectedTimePrediction = predictions.find(
-    (prediction) => new Date(prediction.time).getUTCHours() + 1 == time
+    (prediction) =>
+      prediction.time && new Date(prediction.time).getUTCHours() + 1 == time
   );
   const busyIndex = selectedTimePrediction
     ? selectedTimePrediction.busyindex.toString()
@@ -110,13 +138,22 @@ const MapListCard = ({
         <Card.Title>
           {name}
           <AddMapButton onClick={handleClick} isincart={isincart}>
-            <p>{isincart ? "❤️" : "♥"}</p>
+            <p>{isincart ? "-" : "+"}</p>
           </AddMapButton>
+
+          <BucketButton onClick={handleClickBucket} isinbucket={isinbucket}>
+            <p>{isinbucket ? "❤️" : "♥"}</p>
+          </BucketButton>
         </Card.Title>
         Forecast:{formatTime(time)}
-        <Badge bg={busybadge[busyIndex]} style={{ fontSize: "16px" }}>
-          {busyIndex}
-        </Badge>
+        {selectedTimePrediction && ( // Check if selectedTimePrediction is defined
+          <>
+            {"  "}
+            <Badge bg={busybadge[busyIndex]} style={{ fontSize: "16px" }}>
+              {busyIndex}
+            </Badge>
+          </>
+        )}
         <Card.Text>
           <p className="no-padding-margin">
             Open Time: {opening_hours}
@@ -212,17 +249,17 @@ const Subtitle = styled.p`
   margin: 0px;
 `;
 
-const AddButton = styled.div`
+const BucketButton = styled.div`
   position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
   top: 20px;
-  right: 30px;
+  left: 30px;
   width: 30px;
   height: 30px;
-  // background: ${(props) => (props.isInCart ? "#E55336" : "rgba(0,0,0,0)")};
-  background: ${(props) => (props.isInCart ? "#E55336" : "#60c95d")};
+  // background: ${(props) => (props.isinbucket ? "#E55336" : "rgba(0,0,0,0)")};
+  background: ${(props) => (props.isinbucket ? "#E55336" : "#60c95d")};
   border-radius: 50%;
   padding: 5px;
   cursor: pointer;
